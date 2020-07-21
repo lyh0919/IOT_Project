@@ -1,0 +1,148 @@
+﻿<head>
+    <style>
+        ul li {
+            list-style: none;
+        }
+            .dian {
+            display: flex;
+            position: absolute;
+            bottom: 10px;
+        }
+            .dian li {
+                width: 20px;
+                height: 20px;
+                background: #fff;
+                margin: 0 10px;
+                border-radius: 50%;
+            }
+             .dian li.active {
+                    background: blue;
+                }
+             .main {
+            width: 900px;
+            height: 300px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+            .main img {
+                height: 300px;
+                width: 900px;
+            }
+   
+
+        #box ul {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #box li {
+            padding: 3px;
+            list-style: none;
+            margin-right: 15px;
+            border: 1px solid #eee;
+        }
+
+        #box img {
+            width: 200px;
+            height: 150px;
+        }
+    </style>
+   </head>
+
+<body>
+    <div id="app">
+        <div class="main">
+            <img :src="item" v-for="(item, i) in list" v-show="i===activeIndex">
+            <ul class="dian">
+                <li act="hover(i)" :class="{active:i===activeIndex}" v-for="(item, i) in list"></li>
+            </ul>
+        </div>
+ </div>
+
+
+    <div class="" id="box">	
+    <ul>			
+        <li v-for="v in json.list">				
+        <img v-bind:src="v.src" alt="">				
+        <h4>{{v.des}}</h4>			
+        <p>{{v.price}}</p>		
+            </li>		
+    </ul>	
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let zyy = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    activeIndex: 0,
+                    timer: null,
+                    list: [
+                        "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1035415831,1465727770&fm=26&gp=0.jpg",
+                        'img/02.jpg',
+                        'img /4.jpg'
+                    ],
+                }
+            },
+            mounted() {
+                this.run()
+            },
+            methods: {
+                run() {
+                    this.timer = setInterval(() => { //设置一个定时器
+                        this.activeIndex++  //让下标每秒加一实现切换效果
+                        //如果走到最后一张，让下标回到0
+                        if (this.activeIndex === this.list.length) this.activeIndex = 0
+                    }, 1000);
+                },
+                hover(i) {
+                    clearInterval(this.timer)//鼠标放上去时先移除定时器
+                    this.activeIndex = i //让当前的标签active激活
+                    this.run()  //随后再走定时器
+                }
+            },
+        })
+   
+        new Vue({
+            el: '#box',
+            data: {
+                json:
+                {
+                    list: [{
+                        src:
+                            
+                            'img/02.jpg',
+                        des: '这是第一个描述',
+                        price: 198
+                    },
+                        {
+                            src:  'img/02.jpg',
+                            des: '这是第二个描述',
+                            price: 198
+                        },
+                        {
+                            src: 'img/29.jpg',
+                            des: '这是第三个描述',
+                            price: 211
+                        }, {
+                            src: 'img/37.jpg',
+                            des: '这是第一个描述',
+                            price: 198
+                        },
+                        {
+                            src: 'img/4.jpg',
+                            des: '这是第二个描述',
+                            price: 112
+                        }, {
+                            src: 'img/02.jpg',
+                            des: '这是第三个描述',
+                            price: 423
+                        }]
+                }
+            }
+        })
+       </script>
+</body>
+
