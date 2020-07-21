@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="vue" Version="2.6.11" />
     <PackageReference Include="vue.js" Version="1.0.22" />
   </ItemGroup>
 
