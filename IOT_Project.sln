@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOT_Project_DAL", "IOT_Project_DAL\IOT_Project_DAL.csproj", "{3244A7A6-CE37-484A-95E9-57766CF586FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOT_Project_DAL", "IOT_Project_DAL\IOT_Project_DAL.csproj", "{3244A7A6-CE37-484A-95E9-57766CF586FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOT_Project_BLL", "IOT_Project_BLL\IOT_Project_BLL.csproj", "{CA014A03-35BB-437D-A58A-50232AC6048B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOT_Project_BLL", "IOT_Project_BLL\IOT_Project_BLL.csproj", "{CA014A03-35BB-437D-A58A-50232AC6048B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOT_Project_Common", "IOT_Project_Common\IOT_Project_Common.csproj", "{12B9357E-6E15-43BF-89C4-8CE9E9FCB76E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOT_Project_Common", "IOT_Project_Common\IOT_Project_Common.csproj", "{12B9357E-6E15-43BF-89C4-8CE9E9FCB76E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOT_Project_Api", "IOT_Project_Api\IOT_Project_Api.csproj", "{50C374B5-6B51-4C0D-B1EB-5252A9ED7169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOT_Project_Api", "IOT_Project_Api\IOT_Project_Api.csproj", "{50C374B5-6B51-4C0D-B1EB-5252A9ED7169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOT_Project_WebAdmin", "IOT_Project_WebAdmin\IOT_Project_WebAdmin.csproj", "{2CD9079C-CB07-44B3-B170-77DDEDEE9852}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOT_Project_WebAdmin", "IOT_Project_WebAdmin\IOT_Project_WebAdmin.csproj", "{2CD9079C-CB07-44B3-B170-77DDEDEE9852}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Show", "Show\Show.csproj", "{F7528A93-015F-4F98-B518-B0CFF492264A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2CD9079C-CB07-44B3-B170-77DDEDEE9852}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CD9079C-CB07-44B3-B170-77DDEDEE9852}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CD9079C-CB07-44B3-B170-77DDEDEE9852}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7528A93-015F-4F98-B518-B0CFF492264A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7528A93-015F-4F98-B518-B0CFF492264A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7528A93-015F-4F98-B518-B0CFF492264A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7528A93-015F-4F98-B518-B0CFF492264A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
