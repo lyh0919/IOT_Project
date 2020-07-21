@@ -4,5 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IOT_Project_DAL\IOT_Project_DAL.csproj" />
+    <ProjectReference Include="..\IOT_Project_Model\IOT_Project_Model.csproj" />
+  </ItemGroup>
+
 
 </Project>
