@@ -1,8 +1,10 @@
 ﻿using System;
+using Dapper;
 
 namespace IOT_Project_DAL
 {
-    public class Class1
+    public class DataAccess
     {
+
     }
 }
