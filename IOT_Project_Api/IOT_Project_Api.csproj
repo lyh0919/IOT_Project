@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IOT_Project_BLL\IOT_Project_BLL.csproj" />
     <ProjectReference Include="..\IOT_Project_DAL\IOT_Project_DAL.csproj" />
     <ProjectReference Include="..\IOT_Project_Model\IOT_Project_Model.csproj" />
   </ItemGroup>

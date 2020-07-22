@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Dapper;
+using IOT_Project_BLL.ShopCar;
+using IOT_Project_Model;
 
 namespace IOT_Project_Api
 {
@@ -27,9 +29,9 @@ namespace IOT_Project_Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
 
-            services.AddScoped<IDataAccess, DataAccess>();
+            services.AddScoped<IDataAccess<Productinfo>, DataAccess<Productinfo>>();
+            services.AddScoped<IGoodsList, GoodsList>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

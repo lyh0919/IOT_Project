@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IOT_Project_BLL.ShopCar;
 using IOT_Project_DAL;
 using IOT_Project_Model;
 using Microsoft.AspNetCore.Http;
@@ -13,16 +14,12 @@ namespace IOT_Project_Api.Controllers
     [ApiController]
     public class DefaultController : ControllerBase
     {
-        private IDataAccess _dataaccess;
-        public DefaultController(IDataAccess dataaccess)
+        private IGoodsList _goodsList;
+        public DefaultController(IGoodsList goodsList)
         {
-            _dataaccess = dataaccess;
+            _goodsList = goodsList;
         }
 
-        [HttpGet]
-        public IEnumerable<AdminInfo> Show()
-        {
-            return _dataaccess.ShowAll<AdminInfo>();
-        }
+        
     }
 }
