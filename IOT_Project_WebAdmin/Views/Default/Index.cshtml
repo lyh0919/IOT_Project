@@ -31,16 +31,16 @@
                 }
 
         .main {
-            width: 500px;
-            height: 300px;
+            width: 1200px;
+            height: 600px;
             position: relative;
             display: flex;
             justify-content: center;
         }
 
             .main img {
-                height: 300px;
-                width: 500px;
+                height: 600px;
+                width: 1200px;
             }
     </style>
     
@@ -52,16 +52,17 @@
         }
 
         #box li {
-            padding: 3px;
+            padding: 20px;
             list-style: none;
-            margin-right: 15px;
+            margin-right: 50px;
             border: 1px solid #eee;
         }
 
         #box img {
-            width: 200px;
-            height: 150px;
+            width: 250px;
+            height: 200px;
         }
+
     </style>
    
 </head>
@@ -81,17 +82,16 @@
         <ul>
             <li v-for="v in json.list">
                 <img v-bind:src="v.src" alt="">
-                <h4>{{v.des}}</h4>
-                <p>{{v.price}}</p>
+                <h6>{{v.des}}</h6>
+                <p style="color:red">{{v.price}}</p>
             </li>
         </ul>
     </div>
-
-
-    <img src="/img/0.jpg" />
-
+   
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
     <script>
+        //轮播图
         let zyy = new Vue({
             el: "#app",
             data() {
@@ -99,10 +99,9 @@
                     activeIndex: 0,
                     timer: null,
                     list: [
-
-                        "~/img/0.jpg",
-                        "~/img/02.jpg",
-                        "~/img/16.jpg"
+                        "/img/0.jpg",
+                        "/img/02.jpg",
+                        "/img/16.jpg"
                     ],
                 }
             },
@@ -111,8 +110,10 @@
             },
             methods: {
                 run() {
-                    this.timer = setInterval(() => { //设置一个定时器
-                        this.activeIndex++  //让下标每秒加一实现切换效果
+                    this.timer = setInterval(() => {
+                        //设置一个定时器
+                        this.activeIndex++
+                        //让下标每秒加一实现切换效果
                         //如果走到最后一张，让下标回到0
                         if (this.activeIndex === this.list.length) this.activeIndex = 0
                     }, 1000);
@@ -127,36 +128,45 @@
     </script>
 
     <script>
+        //页面描述
         new Vue({
             el: '#box',
             data: {
                 json: {
                     list: [{
-                        src: 'img/6.jpg',
-                        des: '这是第一个描述',
-                        price: 198
+                        src: '/img/0.jpg',
+                        des: '爱生活网红文艺粉玫瑰带包装',
+                        price: '￥198'
                     },
                     {
-                        src: 'img/6.jpg',
-                        des: '这是第二个描述',
-                        price: 198
+                        src: '/img/02.jpg',
+                        des: '爱美食ins草莓奶油蛋糕盒子',
+                        price: '￥98'
                     },
                     {
-                        src: 'img/6.jpg',
-                        des: '这是第三个描述',
-                        price: 211
+                        src: '/img/16.jpg',
+                        des: '爱家居高大上温馨甜美装饰',
+                        price: '￥198'
                     }, {
-                        src: 'img/6.jpg',
-                        des: '这是第一个描述',
-                        price: 198
+                        src: '/img/23.jpg',
+                        des: '网红透明手机壳蝴蝶结小发夹',
+                        price: '￥38'
                     }, {
-                        src: 'img/6.jpg',
-                        des: '这是第二个描述',
-                        price: 112
-                    }, {
-                        src: 'img/6.jpg',
-                        des: '这是第三个描述',
-                        price: 423
+                        src: '/img/29.jpg',
+                        des: '文艺粉玫瑰代表纯纯的爱情',
+                        price: '￥198'
+                        }, {
+                            src: '/img/37.jpg',
+                            des: '爱家居高品质洗脸池水龙头',
+                        price: '￥598'
+                        } , {
+                            src: '/img/4.jpg',
+                            des: '萌萌哒小熊蛋糕和草莓饮料',
+                        price: '￥98'
+                        }, {
+                            src: '/img/6.jpg',
+                            des: '爱家居五彩缤纷的小金鱼',
+                        price: '￥98'
                     }]
                 }
             }
