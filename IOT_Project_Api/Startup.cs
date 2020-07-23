@@ -30,7 +30,8 @@ namespace IOT_Project_Api
         {
             services.AddControllers();
 
-            services.AddScoped<IDataAccess<Productinfo>, DataAccess<Productinfo>>();
+            services.AddScoped<IDataAccess<ProductInfo>, DataAccess<ProductInfo>>();
+            services.AddScoped<IDataAccess<ProductImg>, DataAccess<ProductImg>>();
             services.AddScoped<IGoodsList, GoodsList>();
         }
 
