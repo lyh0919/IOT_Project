@@ -8,11 +8,12 @@ namespace IOT_Project_WebAdmin.Controllers
 {
     public class DefaultController : Controller
     {
+        //首页显示
         public IActionResult Index()
         {
             return View();
         }
-
+        //评论
         public IActionResult Show()
         {
             return View();
