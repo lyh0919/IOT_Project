@@ -4,13 +4,15 @@ using System.Text;
 
 namespace IOT_Project_DAL
 {
-    public interface IDataAccess
+    public interface IDataAccess<T> where T : class, new()
     {
-        IList<AdminInfo> ShowAll<AdminInfo>();
-        int Add<T>(T t);
-        int Update<T>(T t);
-        //修改库存
-        int UpdatePart(int id,int num);
+        IEnumerable<T> ShowAll();
+
+        IEnumerable<T> ShowAll(int productId);
+
+        int AddOrder(string sql);
+
+        int UptKuCun(string sql);
 
     }
 }

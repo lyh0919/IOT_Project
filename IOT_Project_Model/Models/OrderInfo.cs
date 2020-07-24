@@ -19,6 +19,6 @@ namespace IOT_Project_Model
 		 public string  Receveraddr { get; set; }
 		 public string  Recevertel { get; set; }
 		 public string  Memo { get; set; }
-		 public string  Totalprice { get; set; }
+		 public decimal  Totalprice { get; set; }
 	 }
 }
