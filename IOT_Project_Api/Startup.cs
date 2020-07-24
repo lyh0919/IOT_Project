@@ -40,7 +40,7 @@ namespace IOT_Project_Api
                 options.AddPolicy("getd", policy =>
                 {
                     // 設定允許跨域的來源，有多個的話可以用 `,` 隔開
-                    policy.WithOrigins("http://localhost:50784", "http://localhost:53979")
+                    policy.WithOrigins("http://localhost:50784", "http://localhost:50812")
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowCredentials();

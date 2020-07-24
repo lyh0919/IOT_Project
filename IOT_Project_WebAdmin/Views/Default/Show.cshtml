@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Show";
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,19 +11,19 @@
     <script src="~/vue/vue-resource.js"></script>
     <title></title>
 
-    
+
 </head>
 <body>
-  
+
     <img :src="image" style="width:100px;height:130px">
 
     <script>
         new Vue({
-            
+
             data: {
-                         "title": "纯洁玫瑰",
-                         "image": "/img/0.jpg"
-                    }
+                "title": "纯洁玫瑰",
+                "image": "/img/0.jpg"
+            }
     </script>
 </body>
 </html>

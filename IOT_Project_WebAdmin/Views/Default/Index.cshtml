@@ -1,12 +1,19 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <script src="~/vue/vue.js"></script>
-    <script src="~/vue/vue-resource.js"></script>
+
     <title></title>
-    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
-   
+    @*<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>*@
+    <script src="~/vue/vue.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/vue/axios.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -39,7 +46,7 @@
             width: 350px;
             margin: 20px auto 20px;
             position: relative;
-            float: left;
+            float: right;
         }
 
             .bar input {
@@ -90,12 +97,17 @@
 
         /* 导航条 */
         .topnav {
+            width: 100%;
             overflow: hidden;
             background-color: #c4c4c4;
         }
 
+        .abiaoqian {
+            margin-left: 200px;
+        }
+
             /* 导航条链接 */
-            .topnav a {
+            .abiaoqian a {
                 float: left;
                 display: block;
                 color: #f2f2f2;
@@ -105,7 +117,7 @@
             }
 
                 /* 链接颜色修改 */
-                .topnav a:hover {
+                .abiaoqian a:hover {
                     background-color: #f7c7f0;
                     color: #74b4cb;
                 }
@@ -145,6 +157,7 @@
             position: relative;
             display: flex;
             justify-content: center;
+            margin: auto;
         }
 
             .main img {
@@ -189,7 +202,7 @@
     <style>
         /* 打折促销 */
         .dazhe {
-            padding-bottom:10px;
+            padding-bottom: 10px;
             text-align: left;
         }
 
@@ -219,19 +232,31 @@
                 }
     </style>
 
- 
+
 </head>
 <body>
 
     <div class="header">
         <h1>💟商城首页💟</h1>
     </div>
+    <div style="float:right;width:100%">
+        <form id="main" v-cloak>
+            <div class="bar">
+                <!-- searchString 模型与文本域创建绑定 -->
+                <input type="text" v-model="searchString" placeholder="请输入你喜欢的内容" />
+            </div>
+
+        </form>
+    </div>
 
     <div class="topnav">
-        <a href="http://localhost:50812/default/show">爱家居</a>
-        <a href="http://localhost:50812/default/show">爱美食</a>
-        <a href="http://localhost:50812/default/show">爱装饰</a>
-        <a href="http://localhost:50812/default/show">爱饰品</a>
+        <div class="abiaoqian">
+            <a href="http://localhost:50812/default/show">爱家居</a>
+            <a href="http://localhost:50812/default/show">爱美食</a>
+            <a href="http://localhost:50812/default/show">爱装饰</a>
+            <a href="http://localhost:50812/default/show">爱饰品</a>
+        </div>
+
     </div>
 
 
@@ -244,28 +269,12 @@
         </div>
     </div>
 
-    
-        <form id="main" v-cloak>
-            <div class="bar">
-                <!-- searchString 模型与文本域创建绑定 -->
-                <input type="text" v-model="searchString" placeholder="请输入你喜欢的内容" />
-            </div>
+    <div class="zhong">
+        <h1>💕打折💕促销 </h1>
+    </div>
+    <div class="dazhe">
 
-            <ul>
-                <!-- 循环输出数据 -->
-                <li v-for="article in filteredArticles">
-                    <a v-bind:href="article.url"><img v-bind:src="article.image" /></a>
-                    <p>{{article.title}}</p>
-                </li>
-            </ul>
-        </form>
-       
-
-        <div class="dazhe">
-            <h1>💗新品首发💗 </h1>
-        </div>
-
-        <a href="http://localhost:50812/default/show">
+        <a href="http://localhost:50784/api/default/getgoodslist">
             <div id="box">
                 <ul>
                     <li v-for="v in json.list">
@@ -276,27 +285,11 @@
                 </ul>
             </div>
         </a>
-
-
-        <div class="zhong">
-            <h1>💕打折💕促销 </h1>
-        </div>
-
-        <a href="http://localhost:50812/default/show">
-            <div id="shop">
-                <ul>
-                    <li v-for="v in json.list">
-                        <img v-bind:src="v.src" alt="">
-                        <h6>{{v.des}}</h6>
-                        <p style="color:red">{{v.price}}</p>
-                    </li>
-                </ul>
-            </div>
-        </a>
+    </div>
 
 
 
-        <script>
+    @*<script>
             var demo = new Vue({
                 el: '#main',
                 data: {
@@ -358,123 +351,110 @@
                     }
                 }
             });
-        </script>
+        </script>*@
 
 
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-        <script>
-            /* 轮播图 */
-            let zyy = new Vue({
-                el: "#app",
-                data() {
-                    return {
-                        activeIndex: 0,
-                        timer: null,
-                        list: [
-                            "/img/23.jpg",
-                            "/img/02.jpg",
-                            "/img/16.jpg"
-                        ],
-                    }
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <script>
+        /* 轮播图 */
+        let zyy = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    activeIndex: 0,
+                    timer: null,
+                    list: [
+                        "/img/23.jpg",
+                        "/img/02.jpg",
+                        "/img/16.jpg"
+                    ],
+                }
+            },
+            mounted() {
+                this.run()
+            },
+            methods: {
+                run() {
+                    this.timer = setInterval(() => {
+                        //设置一个定时器
+                        this.activeIndex++
+                        //让下标每秒加一实现切换效果
+                        //如果走到最后一张，让下标回到0
+                        if (this.activeIndex === this.list.length) this.activeIndex = 0
+                    }, 3000);
                 },
-                mounted() {
-                    this.run()
-                },
-                methods: {
-                    run() {
-                        this.timer = setInterval(() => {
-                            //设置一个定时器
-                            this.activeIndex++
-                            //让下标每秒加一实现切换效果
-                            //如果走到最后一张，让下标回到0
-                            if (this.activeIndex === this.list.length) this.activeIndex = 0
-                        }, 1000);
+                hover(i) {
+                    clearInterval(this.timer)//鼠标放上去时先移除定时器
+                    this.activeIndex = i //让当前的标签active激活
+                    this.run()  //随后再走定时器
+                }
+            },
+        })
+    </script>
+
+    <script>
+        import axios from 'axios';
+        //新品描述
+        new Vue({
+            el: '#box',
+            data: {
+                json: {
+                    list: [{
+                        src: '/img/0.jpg',
+                        des: '爱生活网红文艺粉玫瑰带包装',
+                        price: '￥198'
                     },
-                    hover(i) {
-                        clearInterval(this.timer)//鼠标放上去时先移除定时器
-                        this.activeIndex = i //让当前的标签active激活
-                        this.run()  //随后再走定时器
-                    }
-                },
-            })
-        </script>
-
-        <script>
-            //新品描述
-            new Vue({
-                el: '#box',
-                data: {
-                    json: {
-                        list: [{
-                            src: '/img/0.jpg',
-                            des: '爱生活网红文艺粉玫瑰带包装',
-                            price: '￥198'
-                        },
-                        {
-                            src: '/img/02.jpg',
-                            des: '爱美食ins草莓奶油蛋糕盒子',
-                            price: '￥98'
-                        },
-                        {
-                            src: '/img/16.jpg',
-                            des: '爱家居高大上温馨甜美装饰',
-                            price: '￥198'
-                        }, {
-                            src: '/img/23.jpg',
-                            des: '网红透明手机壳蝴蝶结小发夹',
-                            price: '￥38'
-                        }, {
-                            src: '/img/29.jpg',
-                            des: '文艺粉玫瑰代表纯纯的爱情',
-                            price: '￥198'
-                        }, {
-                            src: '/img/37.jpg',
-                            des: '爱家居高品质洗脸池水龙头',
-                            price: '￥598'
-                        }]
-                    }
+                    {
+                        src: '/img/02.jpg',
+                        des: '爱美食ins草莓奶油蛋糕盒子',
+                        price: '￥98'
+                    },
+                    {
+                        src: '/img/16.jpg',
+                        des: '爱家居高大上温馨甜美装饰',
+                        price: '￥198'
+                    }, {
+                        src: '/img/23.jpg',
+                        des: '网红透明手机壳蝴蝶结小发夹',
+                        price: '￥38'
+                    }, {
+                        src: '/img/29.jpg',
+                        des: '文艺粉玫瑰代表纯纯的爱情',
+                        price: '￥198'
+                    }, {
+                        src: '/img/37.jpg',
+                        des: '爱家居高品质洗脸池水龙头',
+                        price: '￥598'
+                    }]
                 }
-            })
-        </script>
-
-        <script>
-            //打折商品描述
-            new Vue({
-                el: '#shop',
-                data: {
-                    json: {
-                        list: [{
-                            src: '/img/10.jpg',
-                            des: '爱装饰干枯玫瑰小耳饰',
-                            price: '￥58 会员打8折'
-                        },
-                        {
-                            src: '/img/16.jpg',
-                            des: '爱家居高大上温馨甜美装饰',
-                            price: '￥98 会员打8折'
-                        },
-                        {
-                            src: '/img/1111.jpg',
-                            des: '时尚慵懒休闲气质文艺女装',
-                            price: '￥198 会员打8折'
-                        }, {
-                            src: '/img/2222.jpg',
-                            des: '时尚慵懒休闲气质文艺女装',
-                            price: '￥138 会员打8折'
-                        }, {
-                            src: '/img/4.jpg',
-                            des: '萌萌哒小熊蛋糕和草莓饮料',
-                            price: '￥78 会员打8折'
-                        }, {
-                            src: '/img/6.jpg',
-                            des: '爱家居五彩缤纷的小金鱼',
-                            price: '￥58 会员打8折'
-                        }]
-                    }
+            },
+            mounted: function () {
+                this.getShop();
+            },
+            methods: {
+                getShop: function () {
+                    // 为给定 ID 的 user 创建请求
+                    axios.get('http://localhost:50784/api/default/getgoodslist', { goodTypeId: 0, goodName: "" })
+                        .then(function (response) {
+                            console.log(response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                 }
-            })
-        </script>
+            }
+        })
+
+                //Vue.http.get('http://localhost:50784/api/default/getgoodslist', { goodTypeId: 0, goodName: ""}).then(function (res) {
+                //    console.log(res);
+
+
+                //}, function () {
+                //    console.log('请求失败处理');
+                //});
+    </script>
+
 </body>
 </html>
 
