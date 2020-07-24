@@ -14,15 +14,17 @@ namespace IOT_Project_WebAdmin.Controllers
             return View();
         }
         //详情页
+        public IActionResult Xiang()
+        {
+            return View();
+        }
+        //评论页
         public IActionResult Show()
         {
             return View();
         }
 
-        //评论页
-        public IActionResult PingLun()
-        {
-            return View();
-        }
+      
+
     }
 }

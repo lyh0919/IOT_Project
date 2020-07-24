@@ -100,16 +100,6 @@
                 width: 1100px;
             }
 
-        /* 新品首发 */
-        .zhong {
-            padding: 30px;
-            text-align: left;
-        }
-
-            .zhong h1 {
-                font-size: 50px;
-            }
-
         /* 商品图 */
         #box ul {
             width: 1000px;
@@ -171,11 +161,11 @@
     <div class="site-nav-bg">
         <p class="sn-back-home">
             <i class="layui-icon layui-icon-home"></i>
-            <a href="#">首页</a>
+            <a href="#"><h1>首页</h1></a>
         </p>
         <div class="sn-quick-menu">
-            <div class="login"><a href="login.html">登录</a></div>
-            <div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>
+            <div class="login"><a href="login.html"><h2>登录</h2></a></div>
+            <div class="sp-cart"><a href="shopcart.html"><h2>购物车</h2></a></div>
         </div>
     </div>
 
@@ -193,14 +183,14 @@
     </div>
 
     <div class="header">
-        <h1>💟商城首页💟</h1>
+        <h2>💟商城首页💟</h2>
     </div>
 
     <div class="topnav">
-        <a href="http://localhost:50812/default/show">爱家居</a>
-        <a href="http://localhost:50812/default/show">爱美食</a>
-        <a href="http://localhost:50812/default/show">爱装饰</a>
-        <a href="http://localhost:50812/default/show">爱饰品</a>
+        <a href="http://localhost:50812/default/Xiang">爱家居</a>
+        <a href="http://localhost:50812/default/Xiang">爱美食</a>
+        <a href="http://localhost:50812/default/Xiang">爱装饰</a>
+        <a href="http://localhost:50812/default/Xiang">爱饰品</a>
     </div>
 
 
@@ -214,11 +204,8 @@
     </div>
 
 
-    <div class="dazhe">
-        <h1>💗新品首发💗 </h1>
-    </div>
-
-    <a href="http://localhost:50812/default/show">
+   
+    <a href="http://localhost:50812/default/Xiang">
         <div id="box">
             <ul>
                 <li v-for="v in json.list">
@@ -235,7 +222,7 @@
         <h1>💕打折💕促销 </h1>
     </div>
 
-    <a href="http://localhost:50812/default/show">
+    <a href="http://localhost:50812/default/Xiang">
         <div id="shop">
             <ul>
                 <li v-for="v in json.list">
