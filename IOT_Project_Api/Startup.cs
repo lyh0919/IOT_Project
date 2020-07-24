@@ -33,6 +33,19 @@ namespace IOT_Project_Api
             services.AddScoped<IDataAccess<ProductInfo>, DataAccess<ProductInfo>>();
             services.AddScoped<IDataAccess<ProductImg>, DataAccess<ProductImg>>();
             services.AddScoped<IGoodsList, GoodsList>();
+
+            services.AddCors(options =>
+            {
+                // Policy 名稱 CorsPolicy 是自訂的，可以自己改
+                options.AddPolicy("getd", policy =>
+                {
+                    // 設定允許跨域的來源，有多個的話可以用 `,` 隔開
+                    policy.WithOrigins("http://localhost:50784", "http://localhost:53979")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowCredentials();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +59,9 @@ namespace IOT_Project_Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("getd");
+            
 
             app.UseEndpoints(endpoints =>
             {
