@@ -118,10 +118,7 @@ namespace IOT_Project_Api.Controllers
 
             }
 
-
             _goodsList.UptKuCun(redis.Get<List<ProductInfo>>("shopcar"));
-
-            
 
             if (_goodsList.AddOrder(order, orderdetails) > 0)
             {
