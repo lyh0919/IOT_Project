@@ -5,63 +5,21 @@
     <script src="~/vue/vue.js"></script>
     <script src="~/vue/vue-resource.js"></script>
     <title></title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: Arial;
-            padding: 10px;
-            background: #f1f1f1;
-        }
-
-        /* 头部标题 */
-        .header {
-            padding: 30px;
-            text-align: center;
-        }
-
-            .header h1 {
-                font-size: 50px;
-            }
-        /* 导航条 */
-        .topnav {
-            overflow: hidden;
-            background-color: #c4c4c4;
-        }
-
-            /* 导航条链接 */
-            .topnav a {
-                float: left;
-                display: block;
-                color: #f2f2f2;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-
-                /* 链接颜色修改 */
-                .topnav a:hover {
-                    background-color: #f7c7f0;
-                    color: #74b4cb;
-                }
-
-        .shop ul {
-            width: 300px;
-            margin: 50px 30px;
-            text-align: right;
-        }
-
-    </style>
- 
-
+    
 </head>
 <body>
-   
+  
+    <img :src="image" style="width:100px;height:130px">
 
-   
-
+    <script>
+        new Vue({
+            
+            data: {
+                         "title": "纯洁玫瑰",
+                         "image": "/img/0.jpg"
+                    }
+    </script>
 </body>
 </html>
 
