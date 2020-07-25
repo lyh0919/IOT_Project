@@ -18,13 +18,18 @@ namespace IOT_Project_WebAdmin.Controllers
         {
             return View();
         }
-        //评论页
-        public IActionResult Show()
+
+
+        //朱佳龙的订单页
+        public IActionResult Ding()
         {
             return View();
         }
-
-      
+        //朱佳龙的订单详情页
+        public IActionResult Xq()
+        {
+            return View();
+        }
 
     }
 }

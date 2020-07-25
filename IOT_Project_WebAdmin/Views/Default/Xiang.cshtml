@@ -71,11 +71,11 @@
                     border: none;
                 }
 
-      
-    </style>
+      </style>
 
 </head>
 <body>
+
     <div class="site-nav-bg" style="height:80px;">
         <p class="sn-back-home">
             <i class="layui-icon layui-icon-home"></i>
@@ -117,39 +117,82 @@
         </ul>
       </div>
 
+
+
+
     <div id="app" style="margin-left:20px;">
         <table class="table table-bordered">
             <tr>
                 <td>
-                    用户名称：
+                    商品编号：
                 </td>
                 <td>
-                    <input id="Text1" type="text" v-model="name" />
+                    <input id="Text1" type="text" v-model="ProductId" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    满意度：
+                    信息反馈编号：
                 </td>
                 <td>
-                    <select id="Select1" v-model="haoping">
+                    <input id="Text1" type="text" v-model="MessageId" />
+                </td>
+               <tr>
+                <td>
+                    留言类型：
+                </td>
+                <td>
+                    <select id="Select1" v-model="MessageType">
                         <option value="">五星好评</option>
                         <option value="四星喜欢">四星喜欢</option>
                         <option value="一般喜欢">一般喜欢</option>
                         <option value="差评">差评</option>
-
-                    </select>
+                     </select>
                 </td>
             </tr>
             <tr>
                 <td>
-                    用户反馈：
+                    留言主题：
                 </td>
                 <td>
-                    <textarea id="TextArea1" rows="5" cols="100" v-model="liuyan" placeholder="用户留言板..."></textarea>
-
+                    <input id="Text1" type="text" v-model="Messagetitle" />
                 </td>
             </tr>
+
+            <tr>
+                <td>
+                    留言内容：
+                </td>
+                <td>
+                    <textarea id="TextArea1" rows="5" cols="100" v-model="Messagecontent" placeholder="用户留言板..."></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    留言客户编号：
+                </td>
+                <td>
+                    <input id="Text1" type="text" v-model="UserId" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    留言客户名：
+                </td>
+                <td>
+                    <input id="Text1" type="text" v-model="Username" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    留言日期：
+                </td>
+                <td>
+                    <input id="Text1" type="text" v-model="Commentdate" />
+                </td>
+            </tr>
+
+
             <tr>
                 <td>
                     <input id="Button1" type="button" value="提交留言" v-on:click="add()" />
@@ -169,16 +212,21 @@
             el: "#app",
             data() {
                 return {
-                    name: "",
-                    haoping: "",
-                    liuyan: "",
+                    ProductId:"",
+                    MessageId: "",
+                    MessageType: "",
+                    Messagetitle: "",
+                    Messagecontent: "",
+                    UserId: "",
+                    Username: "",
+                    Commentdate:"",
                     info: ""
                 }
             },
             methods: {
                 add: function () {
-                    this.info = "用户名称：" + this.name + "\r\n好评度："
-                        + this.haoping + "\r\n留言：" + this.liuyan;
+                    this.info = "用户名称：" + this.Username + "\r\n留言类型："
+                        + this.MessageType + "\r\n留言：" + this.Messagecontent;
                 }
             }
         })
