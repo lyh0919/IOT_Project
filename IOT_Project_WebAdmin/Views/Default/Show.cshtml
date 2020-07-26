@@ -3,28 +3,144 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <script src="~/vue/vue.js"></script>
-    <script src="~/vue/vue-resource.js"></script>
-    <title></title>
+<link href="~/shopindex/static/css/main.css" rel="stylesheet" />
+<link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+<script src="~/shopindex/layui/layui.js"></script>
+
+<style>
+    .box {
+        width: 600px;
+        height: 600px;
+        margin: auto;
+        margin-top: 100px;
+    }
+
+    .box1 {
+        width: 300px;
+        height: 400px;
+        float: left;
+    }
+
+        .box1 img {
+            width: 300px;
+            height: 400px;
+        }
+
+    .box2 {
+        width: 250px;
+        height: 600px;
+        float: left;
+        margin-left: 20px;
+    }
+
+    .jia {
+        height: 16px;
+        width: auto;
+        text-align: center;
+        display: inline-block;
+        padding: 5px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    .jian {
+        height: 16px;
+        width: auto;
+        text-align: center;
+        display: inline-block;
+        padding: 5px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+</style>
+
+<div class="site-nav-bg" style="height:40px">
+    <div class="site-nav w1200">
+        <p class="sn-back-home">
+            <i class="layui-icon layui-icon-home"></i>
+            <a href="/Default/Index" style="font-size:20px">首页</a>
+        </p>
+        <div class="sn-quick-menu">
+            <div class="login"><a href="RegisterIndex.html" style="font-size:20px">注册</a></div>
+            <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
+        </div>
+    </div>
+</div>
+
+<div class="box">
+    <div class="box1">
+    </div>
+    <div class="box2">
+        <p id="productname"></p>
+        <p id="price"></p>
+        <div id="put">
+            <span class="jian" id="jian">-</span>
+            <input type="text" value="1" id="num" style="width:50px;text-align:center;height:22px;" />
+            <span class="jia" id="jia">+</span>
+        </div>
+        <p>
+            <input type="button" value="购买" class="btn btn-info" />
+            <input type="button" value="加入购物车" class="btn btn-success" id="shopcar" />
+        </p>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    var id = window.location.search.split('?')[1].split('=')[1];
+
+    $(function () {
+        $.get('http://localhost:50784/api/default/getproductinfo?productId=' + id, function (res) {
+            var img = "";
+            $.each(res.productImgs, function (i, v) {
+                img = '<img src="/img/' + v.picture + '" />';
+            });
 
 
-</head>
-<body>
+            $(".box1").append(img);
+            $("#productname").html(res.productName);
+            $("#price").html(res.productPrice);
 
-    <img :src="image" style="width:100px;height:130px">
+        });
+    });
 
-    <script>
-        new Vue({
+    window.onload = function () {
+        var Jjian = document.getElementById("jian");
+        var Jjia = document.getElementById("jia");
+        var zj = document.getElementsByTagName("input")[0];
+        var i = 1;
 
-            data: {
-                "title": "纯洁玫瑰",
-                "image": "/img/0.jpg"
-            }
-    </script>
-</body>
-</html>
+        Jjia.onclick = function () {
+            //zj.value = ++i;
+            i = zj.value;
+            zj.value = ++i;
+
+        }
+        Jjian.onclick = function () {
+            i = zj.value;
+            zj.value = --i;
+        }
+
+    }
+
+    $("#shopcar").click(function () {
+        var num = $("#num").val();
+        $.get('http://localhost:50784/api/shopcar/addcar?goodId=' + id + '&goodNum=' + num, function (res) {
+            alert(res);
+
+            $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
+                if (res != "购物车空空如也") {
+                    $("#carnum").html(res.count);
+                }
+                else {
+                    $("#carnum").html(0);
+                }
+
+
+            });
+        });
+    });
+
+
+</script>
 

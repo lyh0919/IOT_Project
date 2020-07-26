@@ -6,14 +6,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-
-    <title></title>
+    <meta charset="utf-8" name="viewport" content="width=device-width" />
     @*<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>*@
     <script src="~/vue/vue.js"></script>
-
+    <script src="~/vue/axios.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/vue/axios.min.js"></script>
+
+    <title>BuyedProduct</title>
+    <link href="~/shopindex/static/css/main.css" rel="stylesheet" />
+    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/shopindex/layui/layui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link id="layuicss-layer" rel="stylesheet" href="http://demo.cssmoban.com/cssthemes5/ccpt_5_bbh/res/layui/css/modules/layer/default/layer.css?v=3.1.1" media="all">
+
+
     <style>
         * {
             box-sizing: border-box;
@@ -187,8 +194,9 @@
             #box ul li {
                 border-bottom: 1px solid #ddd;
                 padding: 30px;
-                float: right;
+                float: left;
                 overflow: hidden;
+                list-style: none;
             }
 
                 #box ul li img {
@@ -235,6 +243,19 @@
 
 </head>
 <body>
+    <div class="site-nav-bg" style="height:40px">
+        <div class="site-nav w1200">
+            <p class="sn-back-home">
+                <i class="layui-icon layui-icon-home"></i>
+                <a href="#" style="font-size:20px">首页</a>
+            </p>
+            <div class="sn-quick-menu">
+                <div class="login"><a href="RegisterIndex.html" style="font-size:20px">注册</a></div>
+                <div class="sp-cart"><a href="/" style="font-size:20px">购物车</a><span>0</span></div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="header">
         <h1>💟商城首页💟</h1>
@@ -274,17 +295,11 @@
     </div>
     <div class="dazhe">
 
-        <a href="http://localhost:50784/api/default/getgoodslist">
-            <div id="box">
-                <ul>
-                    <li v-for="v in json.list">
-                        <img v-bind:src="v.src" alt="">
-                        <h6>{{v.des}}</h6>
-                        <p style="color:red">{{v.price}}</p>
-                    </li>
-                </ul>
-            </div>
-        </a>
+        <div id="box">
+            <ul id="shoplist">
+            </ul>
+        </div>
+
     </div>
 
 
@@ -355,7 +370,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    
+
     <script>
         /* 轮播图 */
         let zyy = new Vue({
@@ -394,65 +409,27 @@
     </script>
 
     <script>
-        import axios from 'axios';
+        //http://localhost:50784/api/default/getproductinfo
         //新品描述
-        new Vue({
-            el: '#box',
-            data: {
-                json: {
-                    list: [{
-                        src: '/img/0.jpg',
-                        des: '爱生活网红文艺粉玫瑰带包装',
-                        price: '￥198'
-                    },
-                    {
-                        src: '/img/02.jpg',
-                        des: '爱美食ins草莓奶油蛋糕盒子',
-                        price: '￥98'
-                    },
-                    {
-                        src: '/img/16.jpg',
-                        des: '爱家居高大上温馨甜美装饰',
-                        price: '￥198'
-                    }, {
-                        src: '/img/23.jpg',
-                        des: '网红透明手机壳蝴蝶结小发夹',
-                        price: '￥38'
-                    }, {
-                        src: '/img/29.jpg',
-                        des: '文艺粉玫瑰代表纯纯的爱情',
-                        price: '￥198'
-                    }, {
-                        src: '/img/37.jpg',
-                        des: '爱家居高品质洗脸池水龙头',
-                        price: '￥598'
-                    }]
-                }
-            },
-            mounted: function () {
-                this.getShop();
-            },
-            methods: {
-                getShop: function () {
-                    // 为给定 ID 的 user 创建请求
-                    axios.get('http://localhost:50784/api/default/getgoodslist', { goodTypeId: 0, goodName: "" })
-                        .then(function (response) {
-                            console.log(response);
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                }
-            }
-        })
+        $.get('http://localhost:50784/api/default/getgoodslist?goodTypeId=0&goodName=', function (res) {
+            console.log(res);
 
-                //Vue.http.get('http://localhost:50784/api/default/getgoodslist', { goodTypeId: 0, goodName: ""}).then(function (res) {
-                //    console.log(res);
+            var html = "";
+            $.each(res, function (i, v) {
+                html += '<a href="/Default/Show?goodId=' + v.productId + '">';
+                html += '<li>';
+                $.each(v.productImgs, function (i, s) {
+                    html += '<img src="/img/' + s.picture + '" >';
+                })
+                html += '<h6>' + v.productName + '</h6>';
+                html += '<p style="color:red">' + v.productPrice + '</p>';
+                html += '</li>';
+                html += '</a>';
+            });
+            $("#shoplist").append(html);
+        });
 
-
-                //}, function () {
-                //    console.log('请求失败处理');
-                //});
+            
     </script>
 
 </body>

@@ -12,11 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\img\0.jpg" />
+    <None Include="wwwroot\img\1.jpg" />
     <None Include="wwwroot\img\02.jpg" />
     <None Include="wwwroot\img\16.jpg" />
     <None Include="wwwroot\img\23.jpg" />

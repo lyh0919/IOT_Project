@@ -19,6 +19,11 @@ namespace IOT_Project_WebAdmin.Controllers
             return View();
         }
 
+        public IActionResult ShopCar()
+        {
+            return View();
+        }
+
         //评论页
         public IActionResult PingLun()
         {
