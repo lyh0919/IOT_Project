@@ -13,7 +13,7 @@ namespace IOT_Project_Model
 		 public string  UserSex { get; set; }
 		 public string  UserRealName { get; set; }
 		 public string  UserTel { get; set; }
-		 public string  UserBirthday { get; set; }
+		 public DateTime  UserBirthday { get; set; }
 		 public string  UserLevel { get; set; }
 		 public string  UserAddress { get; set; }
 		 public string  UserEmail { get; set; }

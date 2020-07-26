@@ -10,6 +10,7 @@
     <title>Document</title>
     <link href="~/shopindex/static/css/main.css" rel="stylesheet" />
     <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/shopindex/layui/layui.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -18,45 +19,42 @@
 <body>
 
 
-    <div class="site-nav-bg">
+    <div class="site-nav-bg" style="height:40px">
         <div class="site-nav w1200">
             <p class="sn-back-home">
                 <i class="layui-icon layui-icon-home"></i>
-                <a href="#">首页</a>
+                <a href="#" style="font-size:20px">首页</a>
             </p>
             <div class="sn-quick-menu">
-                <div class="login"><a href="login.html">登录</a></div>
-                <div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>
+                <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
+                <div class="sp-cart"><a href="shopcart.html" style="font-size:20px">购物车</a><span>2</span></div>
             </div>
         </div>
     </div>
 
 
 
-    <div class="header">
+    @*<div class="header">
         <div class="headerLayout w1200">
             <div class="headerCon">
                 <h1 class="mallLogo">
-                    <a href="#" title="yy商城">
-                        <img src="~/shopindex/static/img/logo.png" />
-                    </a>
-                </h1>
-                <div class="mallSearch">
-                    <form action="" class="layui-form" novalidate="">
-                        <input type="text" name="title" required="" lay-verify="required" autocomplete="off" xdclass="layui-input" placeholder="请输入需要的商品">
+                    <a href="#" title="yy商城">*@
+    @*<img src="~/shopindex/static/img/logo.png" />*@
+    @*</a>
+        </h1>*@
+    @*<div class="mallSearch">
+            <form action="" class="layui-form" novalidate="">
+                <input type="text" name="title" required="" lay-verify="required" autocomplete="off" xdclass="layui-input" placeholder="请输入需要的商品">
 
-
-
-
-                        <button class="layui-btn" lay-submit="" lay-filter="formDemo">
-                            <i class="layui-icon layui-icon-search"></i>
-                        </button>
-                        <input type="hidden" name="" value="">
-                    </form>
-                </div>
+                <button class="layui-btn" lay-submit="" lay-filter="formDemo">
+                    <i class="layui-icon layui-icon-search"></i>
+                </button>
+                <input type="hidden" name="" value="">
+            </form>
+        </div>*@
+    @*</div>
             </div>
-        </div>
-    </div>
+        </div>*@
 
 
     <div class="content content-nav-base  login-content">
@@ -64,10 +62,10 @@
             <div class="inner-cont0">
                 <div class="inner-cont1 w1200">
                     <div class="inner-cont2">
-                        <a href="commodity.html" class="active">所有商品</a>
-                        <a href="buytoday.html">今日团购</a>
-                        <a href="information.html">yy资讯</a>
-                        <a href="about.html">关于我们</a>
+                        @*<a href="commodity.html" class="active">所有商品</a>
+                            <a href="buytoday.html">今日团购</a>
+                            <a href="information.html">yy资讯</a>
+                            <a href="about.html">关于我们</a>*@
                     </div>
                 </div>
             </div>
@@ -75,34 +73,35 @@
         <div class="login-bg">
             <div class="login-cont w1200">
                 <div class="form-box">
-                    @using (Html.BeginForm("Login", "Administrator", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-                    {
 
-                        <form class="layui-form" action="/Administrator/Login">
-                            <legend>手机号登录</legend>
-                            <div class="layui-form-item">
-                                <div class="layui-inline iphone">
-                                    <div class="layui-input-inline">
-                                        <i class="layui-icon layui-icon-cellphone iphone-icon"></i>
-                                        <input type="tel" name="phone" id="phone" lay-verify="required|phone" placeholder="请输入手机号" autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
-                                <div class="layui-inline veri-code">
-                                    <div class="layui-input-inline">
-                                        <input id="pnum" type="text" name="pnum" lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
-                                        <input type="button" class="layui-btn" id="find" value="验证码">
-                                    </div>
+
+                    <form class="layadmin-user-login-box layadmin-user-login-body layui-form" action="/Login/ShowCustomer">
+                        <legend>账号密码登录</legend>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <i class="layadmin-user-login-icon layui-icon layui-icon-username"></i>
+                                    <input type="text" name="UserName" id="UserName" placeholder="请输入账号" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
-                            <div class="layui-form-item login-btn">
-                                <div class="layui-input-block">
-                                    <input id="Submit1" class="layui-btn" type="submit" value="后台代码登录" />
-                                    @*<button class="layui-btn" lay-submit="" lay-filter="demo1" onclick="return false">登录</button>*@
-                                </div>
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <i class="layadmin-user-login-icon layui-icon layui-icon-password"></i>
+                                    <input id="UserPwd" type="password" name="UserPwd" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 
+                                </div>
                             </div>
-                        </form>
-                    }
+                            <a style="color:cornflowerblue;float:right"onclick="LookupPwd()">找回密码</a>
+                        </div>
+                        <div class="layui-form-item layui-layout-admin">
+                            <div class="layui-input-block">
+                                @*<input id="Submit1" class="layui-btn" type="submit" value="后台代码登录" />*@
+                                <button class="layui-btn" type="button" onclick="LoginPage()">登录</button>
+                            </div>
+
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -140,65 +139,52 @@
             var $ = layui.$, form = layui.form;
 
 
-            $("#find").click(function () {
-                //if (!/^1\d{10}$/.test($("#phone").val())) {
-                //    layer.msg("请输入正确的手机号");
-                //    return false;
-                //}
+            //$("#LoginPage").click(function () {
+            //    //if (!/^1\d{10}$/.test($("#phone").val())) {
+            //    //    layer.msg("请输入正确的手机号");
+            //    //    return false;
+            //    //}
 
 
 
-                    $.ajax({
-                        type: "get",
-                        url: "/Administrator/DengLu?Phone=" + $("#phone").val(),
-                        dataType: "json",//返回的
+            //    })
 
-                        success: function (data) {
-                            console.log('right:'+data);
-                            if (data.result) {
-                                $("#find").addClass(" layui-btn-disabled");
-                                $('#find').attr('disabled', "true");
-                                settime(this);
+        });
 
-                                $("#msg").text(data.msg);
-                            } else {
-                                layer.msg(data.msg);
-                            }
-                        },
-                        error: function (msg) {
-                            console.log('erro:'+msg);
-                        }
-                    });
+        function LoginPage() {
+            var obj = {};
+            obj.UserName =$("#UserName").val();
+            obj.UserPwd = $("#UserPwd").val();
+            console.log(obj);
+            $.ajax({
+                url: "http://localhost:50784/api/Login/LoginCustomer",
+                data: JSON.stringify(obj),
+                type: "post",
+                dataType: "text",//返回的
+                contentType: "application/json",
+                success: function (data) {
+                    alert(data);
+                    console.log(data);
+                    
+                    localStorage["Mylocal"] = data;
+                    if (data!= "") {
+                        alert("登录成功");
 
-                })
+                        location.href = "/Shop/BuyedProduct";
 
-            });
 
-            var countdown = 60;
-            function settime(obj) {
-                if (countdown == 0) {
-                    obj.removeAttribute("disabled");
-                    obj.classList.remove("layui-btn-disabled")
-                    obj.value = "获取验证码";
-                    countdown = 60;
-                    return;
-                } else {
-                    obj.setAttribute("disabled", true);
-                    obj.value = "重新发送(" + countdown + ")";
-                    countdown--;
-
-                    setTimeout(function () {
-                        settime(obj)
+                    } else {
+                        alert("登录失败");
                     }
-                        , 1000)
+
                 }
-            }
+            });
+        }
 
 
-        document.getElementById("find").onclick = function () { settime(this); }
-
-
-
+        function LookupPwd() {
+            location.href = "/Shop/LookInfoPwd";
+        }
     </script>
 
 

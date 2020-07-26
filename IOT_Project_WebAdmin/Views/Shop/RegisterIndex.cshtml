@@ -1,0 +1,218 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>RegisterIndex</title>
+    <link href="~/shopindex/static/css/main.css" rel="stylesheet" />
+    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/shopindex/layui/layui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link id="layuicss-layer" rel="stylesheet" href="http://demo.cssmoban.com/cssthemes5/ccpt_5_bbh/res/layui/css/modules/layer/default/layer.css?v=3.1.1" media="all">
+
+</head>
+@*<img src="~/shopindex/static/img/load_bg.jpg" />*@
+<body>
+
+    <div style="text-align:center"> <h1>个人信息填写</h1></div>
+    <div style="width:80%;height:100%;margin-left:400px;margin-top:100px" >
+        <div class="layui-fluid">
+            <div class="layui-card">
+                <form class="layui-form" action="" lay-filter="component-form-group">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户名称:</label>
+                        <div class="layui-input-block" style="width:190px">
+                            <input type="text" name="UserName" id="UserName" autocomplete="off" placeholder="请输入用户名称" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户密码:</label>
+                        <div class="layui-input-block" style="width:190px">
+                            <input type="password" name="UserPwd" id="UserPwd" autocomplete="off" placeholder="请输入用户密码" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户真实姓名：</label>
+                        <div class="layui-input-block" style="width:190px">
+                            <input type="text" name="UserRealName" id="UserRealName" autocomplete="off" placeholder="请输入真实用户名称" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="男" title="男" checked="checked">
+                            <input type="radio" name="sex" value="女" title="女">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户电话:</label>
+                        <div class="layui-input-block" style="width:190px">
+                            <input type="text" name="UserTel" id="UserTel" autocomplete="off" placeholder="请输入电话号码" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">出生日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="UserBirthday" id="UserBirthday" autocomplete="off" placeholder="yyyy-MM-dd" class="layui-input">
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">家庭住址:</label>
+                        <div class="layui-input-block">
+                            <div class="layui-inline" id="typename">
+                                <select name="Province" id="xm1" lay-verify="required" lay-filter="xmFilter">
+                                    <option value="1">北京市</option>
+                                    <option value="2">天津市</option>
+                                    <option value="3">河北省</option>
+                                    <option value="4">山西省</option>
+                                    <option value="5">辽宁省</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline" id="typename">
+                                <select name="City" id="xm2" lay-verify="required" lay-filter="xmFilter">
+                                    <option value="6">石家庄市</option>
+                                    <option value="7">唐山市</option>
+                                    <option value="8">秦皇岛市</option>
+                                    <option value="9">邢台市</option>
+                                    <option value="10">张家口市</option>
+                                </select>
+                            </div>
+                            <div class="layui-inline" id="typename">
+                                <select name="Home" id="xm3" lay-verify="required" lay-filter="xmFilter">
+                                    <option value="11">开平区</option>
+                                    <option value="12">古治区</option>
+                                    <option value="13">丰南区</option>
+                                    <option value="14">丰润区</option>
+                                    <option value="15">乐亭县</option>
+                                </select>
+                            </div>
+                            <input type="text" id="adderss" style="width:600px;height:38px" />
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">邮箱地址:</label>
+                        <div class="layui-input-block" style="width:190px">
+                            <input type="email" name="UserEmail" id="UserEmail" autocomplete="off" placeholder="请输入邮箱" lay-verify="email" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-layout-admin">
+                        <div class="layui-input-block">
+                            <div class="layui-footer" style="left: 0;padding-left:450px">
+                                <button type="button" class="layui-btn" onclick="AddUser()">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary" onclick="ClosePage()">取消</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+        </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        //注册个人信息填写
+        layui.config({
+            base: '../shopindex/static/js/util' //你存放新模块的目录，注意，不是layui的模块目录
+        }).use(['jquery', 'form'], function () {
+            var $ = layui.$, form = layui.form;
+        });
+        //var from;
+        ////嵌套在指定容器中
+        //layui.use('laydate', function(){
+        //  var laydate = layui.laydate;
+        //   // form = layui.form;
+        //  //laydate.render({
+        //  //  elem: '#UserBirthday', // 指定元素
+        //  //  type:'date'
+        //  //});
+        //});
+
+
+
+        //修改数据
+        function AddUser() {
+            var name = $("#UserName").val();
+            var pwd = $("#UserPwd").val();
+             if (pwd == null) {
+                alert("密码不能为空");
+            }
+            var realname = $("#UserRealName").val();
+             if (realname == null) {
+                alert("真实姓名不能为空");
+            }
+            var tel = $("#UserTel").val();
+            if (!(/^[1][3,4,5,6,7,8,9][0-9]{9}$/.test(tel))) {
+                alert("手机号码有误，请重填");
+                return false;
+            }
+            var sex = $("input[type='radio']:checked").val();
+           // var birth = 
+            var address = $("#xm1 option:selected").text() + $("#xm2 option:selected").text() + $("#xm3 option:selected").text() + $("#adderss").val();
+            var email = $("#UserEmail").val();
+         //    var reg = "/(^[a-zA-Z0-9_-]+[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+$)|(^$)/"; //正则表达式
+            if (email === "") { //输入不能为空
+                alert("输入不能为空!");
+                return false;
+            }
+           
+            var obj = {};
+            obj.UserName = name;
+            obj.UserPwd = pwd;
+            obj.UserRealName = realname;
+            obj.UserTel = tel;
+            obj.UserSex = sex;
+           // obj.UserBirthday = $("#UserBirthday").val();
+            obj.UserAddress = address;
+           // obj.UserEmail = email;
+            obj.UserLevel = "1";
+            $.ajax({
+                url: "http://localhost:50784/api/Login/RegisterUser",
+                data: {obj:JSON.stringify(obj),token:localStorage["Mylocal"]},
+                type: "post",
+                dataType: "json",//返回的
+                contentType: "application/json",
+                success: function (res) {
+                    if (res >= 1) {
+                        alert("添加成功");
+                    }
+                    else if (res == 0) {
+                        alert("用户名重复");
+                    }
+                    else {
+                         alert("添加失败");
+                    }
+
+
+                },
+                error: function (msg) {
+                    console.log('erro:' + msg);
+                }
+
+            });
+
+        }
+        function ClosePage() {
+            window.close();
+            location.href = "/Shop/ShopIndex";
+    }
+    </script>
+</body>
+</html>

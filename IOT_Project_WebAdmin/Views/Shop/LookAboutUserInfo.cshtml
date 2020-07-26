@@ -1,0 +1,111 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>个人信息查看汇总</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/vue/vue.js"></script>
+
+    <script src="~/vue/vue-resource.js"></script>
+ 
+    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/shopindex/static/css/main.css" rel="stylesheet" />
+    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+
+    <script src="~/shopindex/layui/layui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link id="layuicss-layer" rel="stylesheet" href="http://demo.cssmoban.com/cssthemes5/ccpt_5_bbh/res/layui/css/modules/layer/default/layer.css?v=3.1.1" media="all">
+
+</head>
+<body>
+    <div class="site-nav-bg" style="height:40px">
+        <div class="site-nav w1200">
+            <p class="sn-back-home">
+                <i class="layui-icon layui-icon-home"></i>
+                <a href="#" style="font-size:20px">首页</a>
+            </p>
+            <div class="sn-quick-menu">
+                <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
+                <div class="sp-cart"><a href="shopcart.html" style="font-size:20px">购物车</a><span>2</span></div>
+            </div>
+        </div>
+    </div>
+    <a href="#" onclick="updateUser()">修改个人信息</a>
+    @*//<a href="#" onclick="">以往购买的商品</a>*@
+    <form action="">
+        <div>
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>用户名称</th>
+                        <th>用户性别</th>
+                        <th>真实名字</th>
+                        <th>电话</th>
+                        <th>生日</th>
+                        <th>用户级别</th>
+                        <th>住址</th>
+                        <th>用户邮箱</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+    <script>
+        Vue.http.get('http://localhost:50784/api/Login/ShowCustromer?token=' + localStorage["Mylocal"]).then(function (data) {
+            if (data == null) {
+                alert("用户是否还没注册或者失败");
+            }
+            else {
+                var str = "";
+                $(data.body).each(function () {
+                    str += "<tr>";
+                    str += "<td>" + this.userName + "</td>";
+                    str += "<td>" + this.userSex + "</td>";
+                    str += "<td>" + this.userRealName + "</td>";
+                    str += "<td>" + this.userTel + "</td>";
+                    str += "<td>" + timeFormatter(this.userBirthday) + "</td>";
+                    str += "<td>" + this.userLevel + "</td>";
+                    str += "<td>" + this.userAddress + "</td>";
+                    str += "<td>" + this.userEmail + "</td>";
+                    str += "/<tr>";
+                });
+                $("#tbody").append(str);
+            }
+        })
+
+        /*  ========== 添加弹出层父页面  button 事件 ==============*/
+
+        function updateUser() {
+            layui.use('layer', function () {
+                layer.open({
+                    type: 2,
+                    content: '/Login/UpdateRegister'
+                    ,   //添加页，后台controller转发到指定页
+                    area: ["800px", "600px"]
+                    , fixed: false,
+                    //maxmin: true,
+                    shadeClose: true
+                    , end: function () {  //刷新页面
+                        location.reload();
+                    }
+                })
+            })
+        }
+         function timeFormatter(value) {
+        //parseInt(value.replace("/Date(", "").replace(")/", "").split("+")[0])
+        var da = new Date(value);
+        return da.getFullYear() + "-" + (da.getMonth() + 1) + "-" + da.getDate()/* + " " + da.getHours() + ":" + da.getMinutes() + ":" + da.getSeconds()*/;
+    }
+    </script>
+</body>
+</html>

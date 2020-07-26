@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BuyedProduct</title>
+    <link href="~/shopindex/static/css/main.css" rel="stylesheet" />
+    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/shopindex/layui/layui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link id="layuicss-layer" rel="stylesheet" href="http://demo.cssmoban.com/cssthemes5/ccpt_5_bbh/res/layui/css/modules/layer/default/layer.css?v=3.1.1" media="all">
+</head>
+<body>
+    <div class="site-nav-bg" style="height:40px">
+        <div class="site-nav w1200">
+            <p class="sn-back-home">
+                <i class="layui-icon layui-icon-home"></i>
+                <a href="#" style="font-size:20px">首页</a>
+            </p>
+            <div class="sn-quick-menu">
+                <div class="login"><a href="RegisterIndex.html" style="font-size:20px">注册</a></div>
+                <div class="sp-cart"><a href="shopcart.html" style="font-size:20px">购物车</a><span>2</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>订单数量</th>
+                    <th>备注</th>
+                    <th>收货人姓名</th>
+                    <th>支付方式</th>
+                    <th>送货方式</th>
+                    <th>收货地址</th>
+                    <th>备注</th>
+                    <th>下单日期</th>
+                </tr>
+            </thead>
+            <tbody id="tbodys">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $.ajax({
+            url: "http://localhost:50784/api/Login/ShowAll?token="+localStorage["Mylocal"],
+            dataType: "json",
+            type: "get",
+            success: function (res) {
+                if (res == null) {
+                     alert("用户是否还没注册或者失败");
+                }
+                else {
+                     var str = "";
+                $.each(res, function (i, n) {
+                    str += "<tr>";
+                    str += "<td>" + n.orderId + "</td>";
+                    str += "<td>" + n.orderamount + "</td>";
+                    str += "<td>" + n.message + "</td>";
+                    str += "<td>" + n.recevername + "</td>";
+                    str += "<td>" + n.paymethod + "</td>";
+                    str += "<td>" + n.postmethod + "</td>";
+                    str += "<td>" + n.receveraddr + "</td>";
+                     str += "<td>" + n.memo + "</td>";
+                    str += "<td>" +timeFormatter( n.orderdate) + "</td>";
+                    str += "</tr>";
+                });
+                $("#tbodys").append(str);
+                }
+
+            }
+        })
+
+        function timeFormatter(value) {
+        //parseInt(value.replace("/Date(", "").replace(")/", "").split("+")[0])
+        var da = new Date(value);
+        return da.getFullYear() + "-" + (da.getMonth() + 1) + "-" + da.getDate()/* + " " + da.getHours() + ":" + da.getMinutes() + ":" + da.getSeconds()*/;
+    }
+    </script>
+</body>
+</html>

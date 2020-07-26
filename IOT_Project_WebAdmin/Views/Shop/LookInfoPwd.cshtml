@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LookInfoPwd</title>
+</head>
+<body>
+    <form>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+
+                    <input type="email" name="UserEmail" id="UserEmail" lay-verify="required" placeholder="请输入邮箱号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item layui-layout-admin">
+            <div class="layui-input-block">
+                <div class="layui-footer" style="left: 0;padding-left:450px">
+                    <button type="button" class="layui-btn" onclick="AddUser()">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary" onclick="ClosePage()">取消</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        function AddUser() {
+            $.ajax({
+                url: "http://localhost:50784/api/Login/LookUpPwd?email=" + $("#UserEmail").val(),
+                dataType: "json",
+                type: "get",
+                success: function (res) {
+                    if (res == "成功") {
+                        alert("密码已发送到邮箱中，请注意查收");
+                    }
+                    
+                }
+            });
+        }
+    </script>
+</body>
+</html>
