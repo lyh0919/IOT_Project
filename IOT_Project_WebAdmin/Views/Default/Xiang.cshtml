@@ -1,0 +1,254 @@
+﻿@{
+    ViewData["Title"] = "Xiang";
+    Layout = null;
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="~/vue/vue.js"></script>
+    <script src="~/vue/vue-resource.js"></script>
+    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/shopindex/static/css/main.css" rel="stylesheet" />
+    <script src="~/shopindex/layui/layui.js"></script>
+    <title></title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial;
+            padding: 10px;
+            background: #f1f1f1;
+        }
+
+        /* 导航条 */
+        .topnav {
+            overflow: hidden;
+            background-color: #c4c4c4;
+        }
+
+            /* 导航条链接 */
+            .topnav a {
+                float: left;
+                display: block;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                /* 链接颜色修改 */
+                .topnav a:hover {
+                    background-color: #f7c7f0;
+                    color: #74b4cb;
+                }
+
+
+        /* 商品图 */
+        #box ul {
+            width: 500px;
+            margin: 5px 3px;
+            text-align: right;
+        }
+
+            #box ul li {
+                border-bottom: 1px solid #ddd;
+                padding: 3px;
+                float: right;
+                overflow: hidden;
+            }
+
+                #box ul li img {
+                    width: 200px;
+                    height: 200px;
+                    float: right;
+                    border: none;
+                }
+
+      </style>
+
+</head>
+<body>
+
+    <div class="site-nav-bg" style="height:80px;">
+        <p class="sn-back-home">
+            <i class="layui-icon layui-icon-home"></i>
+            <a href="#"><h2>首页</h2></a>
+        </p>
+        <div class="sn-quick-menu">
+            <div class="login"><a href="login.html"><h2>登录</h2></a></div>
+            <div class="sp-cart"><a href="shopcart.html"><h2>购物车</h2></a></div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="mallSearch">
+            <form action="" class="layui-form" novalidate="">
+                <input type="text" name="title" required="" lay-verify="required" autocomplete="off" xdclass="layui-input" placeholder="请输入需要的商品">
+                <button class="layui-btn" lay-submit="" lay-filter="formDemo">
+                    <i class="layui-icon layui-icon-search"></i>
+                </button>
+                <input type="hidden" name="" value="">
+            </form>
+        </div>
+    </div>
+
+    <div class="topnav">
+        <a href="http://localhost:50812/default/Xiang">爱家居</a>
+        <a href="http://localhost:50812/default/Xiang">爱美食</a>
+        <a href="http://localhost:50812/default/Xiang">爱装饰</a>
+        <a href="http://localhost:50812/default/Xiang">爱饰品</a>
+    </div>
+
+    <div id="box">
+        <ul>
+            <li v-for="v in json.list">
+                <img v-bind:src="v.src" alt="">
+                <h6>{{v.des}}</h6><br />
+                <p style="color:red">{{v.price}}</p>
+                <p>数量：{{v.sum}}</p>
+                </li>
+        </ul>
+      </div>
+
+
+
+
+    <div id="app" style="margin-left:20px;">
+        <table class="table table-bordered">
+            <tr>
+                <td>
+                    商品编号：
+                </td>
+                <td>
+                    <input id="Text1" type="text" v-model="ProductId" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    信息反馈编号：
+                </td>
+                <td>
+                    <input id="Text1" type="text" v-model="MessageId" />
+                </td>
+               <tr>
+                <td>
+                    留言类型：
+                </td>
+                <td>
+                    <select id="Select1" v-model="MessageType">
+                        <option value="">五星好评</option>
+                        <option value="四星喜欢">四星喜欢</option>
+                        <option value="一般喜欢">一般喜欢</option>
+                        <option value="差评">差评</option>
+                     </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    留言主题：
+                </td>
+                <td>
+                    <input id="Text1" type="text" v-model="Messagetitle" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    留言内容：
+                </td>
+                <td>
+                    <textarea id="TextArea1" rows="5" cols="100" v-model="Messagecontent" placeholder="用户留言板..."></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    留言客户编号：
+                </td>
+                <td>
+                    <input id="Text1" type="text" v-model="UserId" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    留言客户名：
+                </td>
+                <td>
+                    <input id="Text1" type="text" v-model="Username" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    留言日期：
+                </td>
+                <td>
+                    <input id="Text1" type="text" v-model="Commentdate" />
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <input id="Button1" type="button" value="提交留言" v-on:click="add()" />
+                </td>
+            </tr>
+        </table>
+        <br />
+        <h3>用户留言板：</h3>
+        <br />
+        <textarea style="width:400px;height:150px;" v-model="info"></textarea>
+
+    </div>
+
+
+    <script type="text/javascript">
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    ProductId:"",
+                    MessageId: "",
+                    MessageType: "",
+                    Messagetitle: "",
+                    Messagecontent: "",
+                    UserId: "",
+                    Username: "",
+                    Commentdate:"",
+                    info: ""
+                }
+            },
+            methods: {
+                add: function () {
+                    this.info = "用户名称：" + this.Username + "\r\n留言类型："
+                        + this.MessageType + "\r\n留言：" + this.Messagecontent;
+                }
+            }
+        })
+    </script>
+
+    <script>
+        //打折商品描述
+        new Vue({
+            el: '#box',
+            data: {
+                json: {
+                    list: [{
+                        src: '/img/10.jpg',
+                        des: '爱装饰干枯玫瑰小耳饰',
+                        price: '￥58',
+                        sum: '50'
+                    }]
+                     
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

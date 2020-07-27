@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Xq";
+}
+
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="~/vue/vue.js"></script>
+    <script src="~/vue/vue-resource.js"></script>
+
+    <title></title>
+
+</head>
+<body>
+    <div id="app">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">订单列表</h3>
+            </div>
+        </div>
+
+        <table class="table table-bordered" style='text-align: center'>
+            <thead>
+                <tr>
+                    <td>选择</td>
+                    <td>详细订单编号</td>
+                    <td>订单号</td>
+                    <td>商品编号</td>
+                    <td>订购数量</td>
+                    <td>发货状态</td>
+                    <td>收获状态</td>
+                    <td>卖出总价</td>
+                </tr>
+            </thead>
+            <tbody class='table-striped nth-child table-hover'>
+                <tr v-for='item in goodlist' :key='item.id'>
+                    <td><input type="checkbox" click='item.selected=!item.selected'></td>
+                    <td>{{item.OrderDetailId}}</td>
+                    <td>{{item.OrderId}}</td>
+                    <td>{{item.ProductId}}</td>
+                    <td>{{item.Orderamount}}</td>
+                    <td>{{item.poststatus}}</td>
+                    <td>{{item.recevstatus}}</td>
+                    <td>{{item.saletotalprice}}</td>
+</tbody>
+        </table>
+    </div>
+
+    <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    goodlist: [
+                        { 'id': 1, 'OrderDetailId': 't1183', 'OrderId': 't11655583', 'ProductId': 't11', 'orderamount':'8', 'poststatus': '未发货', 'recevstatus': '未收货', 'saletotalprice': '44' },
+                        ]
+                 }
+           })
+    </script>
+
+</body>
+</html>
+
