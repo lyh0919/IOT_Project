@@ -24,10 +24,16 @@ namespace IOT_Project_WebAdmin.Controllers
             return View();
         }
 
-        //评论页
-        public IActionResult PingLun()
+        //订单
+        public IActionResult Ding()
         {
             return View();
         }
+
+        public IActionResult Xq()
+        {
+            return View();
+        }
+        
     }
 }
