@@ -102,6 +102,16 @@
             $("#price").html(res.productPrice);
 
         });
+        $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
+            if (res != "购物车空空如也") {
+                $("#carnum").html(res.length);
+            }
+            else {
+                $("#carnum").html(0);
+            }
+
+
+        });
     });
 
     window.onload = function () {
@@ -129,8 +139,9 @@
             alert(res);
 
             $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
+                console.log(res.length);
                 if (res != "购物车空空如也") {
-                    $("#carnum").html(res.count);
+                    $("#carnum").html(res.length);
                 }
                 else {
                     $("#carnum").html(0);

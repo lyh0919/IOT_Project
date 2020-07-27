@@ -25,6 +25,7 @@ namespace IOT_Project_Api.Controllers
 
             _goodsList = goodsList;
         }
+
         [HttpGet]
         public string AddCar(int goodId,int goodNum)
         {
@@ -59,6 +60,7 @@ namespace IOT_Project_Api.Controllers
                 
             }
             redis.Set("shopcar", list);
+            redis.Expire("shopcar", 3600);
             return "加入成功";
         }
         //显示购物车
@@ -123,6 +125,7 @@ namespace IOT_Project_Api.Controllers
             if (_goodsList.AddOrder(order, orderdetails) > 0)
             {
                 redis.Del("shopcar");
+                
                 return 1;
             }
             return 0;
