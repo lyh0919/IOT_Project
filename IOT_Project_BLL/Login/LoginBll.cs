@@ -101,5 +101,13 @@ namespace IOT_Project_BLL.Login
                 return db.Query<producttypeinfo>(sql).ToList();
             }
         }
+        public List<ProductImg> ShowPicture()
+        {
+            using (SqlConnection db = new SqlConnection(conn))
+            {
+                string sql = $"select * from ProductImg";
+                return db.Query<ProductImg>(sql).ToList();
+            }
+        }
     }
 }

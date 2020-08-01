@@ -22,8 +22,21 @@
 @*<img src="~/shopindex/static/img/load_bg.jpg" />*@
 <body>
 
+    <div class="site-nav-bg" style="height:40px">
+        <div class="site-nav w1200">
+            <p class="sn-back-home">
+                <i class="layui-icon layui-icon-home"></i>
+                <a href="#" style="font-size:20px">首页</a>
+            </p>
+            <div class="sn-quick-menu">
+                <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
+                <div class="sp-cart"><a href="shopcart.html" style="font-size:20px">购物车</a><span>2</span></div>
+            </div>
+        </div>
+    </div>
+
     <div style="text-align:center"> <h1>个人信息填写</h1></div>
-    <div style="width:80%;height:100%;margin-left:400px;margin-top:100px" >
+    <div style="width:80%;height:100%;margin-left:400px;margin-top:100px">
         <div class="layui-fluid">
             <div class="layui-card">
                 <form class="layui-form" action="" lay-filter="component-form-group">
@@ -108,7 +121,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">邮箱地址:</label>
                         <div class="layui-input-block" style="width:190px">
-                            <input type="email" name="UserEmail" id="UserEmail" autocomplete="off" placeholder="请输入邮箱" lay-verify="email" class="layui-input">
+                            <input type="text" name="UserEmail" id="UserEmail" autocomplete="off" placeholder="请输入邮箱"  class="layui-input">
                         </div>
                     </div>
 
@@ -123,10 +136,10 @@
                     </div>
                 </form>
 
-        </div>
+            </div>
         </div>
     </div>
-    
+
     <script type="text/javascript">
         //注册个人信息填写
         layui.config({
@@ -151,11 +164,11 @@
         function AddUser() {
             var name = $("#UserName").val();
             var pwd = $("#UserPwd").val();
-             if (pwd == null) {
+            if (pwd == null) {
                 alert("密码不能为空");
             }
             var realname = $("#UserRealName").val();
-             if (realname == null) {
+            if (realname == null) {
                 alert("真实姓名不能为空");
             }
             var tel = $("#UserTel").val();
@@ -164,40 +177,41 @@
                 return false;
             }
             var sex = $("input[type='radio']:checked").val();
-           // var birth = 
+            // var birth =
             var address = $("#xm1 option:selected").text() + $("#xm2 option:selected").text() + $("#xm3 option:selected").text() + $("#adderss").val();
             var email = $("#UserEmail").val();
-         //    var reg = "/(^[a-zA-Z0-9_-]+[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+$)|(^$)/"; //正则表达式
+            //    var reg = "/(^[a-zA-Z0-9_-]+[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+$)|(^$)/"; //正则表达式
             if (email === "") { //输入不能为空
                 alert("输入不能为空!");
                 return false;
             }
-           
+
             var obj = {};
             obj.UserName = name;
             obj.UserPwd = pwd;
             obj.UserRealName = realname;
             obj.UserTel = tel;
             obj.UserSex = sex;
-           // obj.UserBirthday = $("#UserBirthday").val();
+            obj.UserBirthday = $("#UserBirthday").val();
             obj.UserAddress = address;
-           // obj.UserEmail = email;
-            obj.UserLevel = "1";
+            obj.UserEmail = email;
+            //  obj.UserLevel = "1";
             $.ajax({
                 url: "http://localhost:50784/api/Login/RegisterUser",
-                data: {obj:JSON.stringify(obj),token:localStorage["Mylocal"]},
+                data: JSON.stringify(obj),
                 type: "post",
                 dataType: "json",//返回的
-                contentType: "application/json",
+                contentType: "application/json;charSet=utf-8",
                 success: function (res) {
                     if (res >= 1) {
                         alert("添加成功");
+                        location.href = "/Shop/ShopIndex";
                     }
-                    else if (res == 0) {
+                    else if (res == -1) {
                         alert("用户名重复");
                     }
                     else {
-                         alert("添加失败");
+                        alert("添加失败");
                     }
 
 
@@ -212,7 +226,7 @@
         function ClosePage() {
             window.close();
             location.href = "/Shop/ShopIndex";
-    }
+        }
     </script>
 </body>
 </html>

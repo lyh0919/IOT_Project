@@ -24,7 +24,7 @@ namespace IOT_Project_WebAdmin.Controllers
         {
             return View();
         }
-        //找回密码通过邮箱
+        //重置密码通过邮箱
         public IActionResult LookInfoPwd()
         {
             return View();

@@ -28,5 +28,7 @@ namespace IOT_Project_BLL.Login
         List<Productinfo> ShowProductinfo();
 
         List<producttypeinfo> ShowProducttype();
+
+        List<ProductImg> ShowPicture();
     }
 }

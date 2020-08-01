@@ -66,29 +66,40 @@ namespace IOT_Project_Api.Controllers
                 return null;
             }
         }
-        [HttpPost]
-        public int RegisterUser(Customer m,string token)
+        [HttpPost]       
+        public int RegisterUser([FromBody]Customer m)
         {
-            JWTHelper jWT = new JWTHelper();
-            string json = jWT.GetPayload(token);
-            Customer model = JsonConvert.DeserializeObject<Customer>(json);
-            if (model == null) //没有值就注册信息
-            {                
+            
+                List<Customer> list = _loginBll.ShowCustome().ToList();
+                list = list.Where(s => s.UserName.Equals(m.UserName)).ToList();
+                if (list.Count!=0)
+                {
+                    var name = "";
+                for (int i = 0; i < list.Count; i++)
+                {
+                    name = list[i].UserName;
+                }
+                    if (m.UserName == name)
+                    {
+                        return -1;//用户名相同
+                    }
+                else
+                {
+                    return 0;
+                }    
+                }
+              else
+                {
                     Md5Helper md = new Md5Helper();
                     m.UserPwd = md.ToMd5(m.UserPwd);
+                    m.UserEmail = m.UserEmail + "@qq.com";
+                    m.UserLevel = "1";
                     int flag = _loginBll.Add(m);
                     return flag;
+                }
                 
-            }
-          else if (model.UserName == m.UserName) //有值就判断用户名是否相同 
-            {
-
-                return 0; //返回值为2
-            }
-            else
-            {
-                return -1;
-            }
+               
+                                
         }
 
         /// <summary>
@@ -123,7 +134,7 @@ namespace IOT_Project_Api.Controllers
         /// <returns></returns>
         [HttpPost]
 
-        public int UpdateUser(Customer m,string token)
+        public int UpdateUser([FromBody]Customer m,string token)
         {
             JWTHelper jWT = new JWTHelper();
             string json = jWT.GetPayload(token);
@@ -183,6 +194,13 @@ namespace IOT_Project_Api.Controllers
         }
 
         [HttpGet]
+        public List<ProductImg> ShowPicture()
+        {
+            List<ProductImg> list = _loginBll.ShowPicture();
+            return list;
+        }
+
+        [HttpGet]
         public List<Productinfo> ShowProductInfo()
         {
             List<Productinfo> list = _loginBll.ShowProductinfo();
@@ -193,6 +211,7 @@ namespace IOT_Project_Api.Controllers
         public List<producttypeinfo> ShowProducttype()
         {
             List<producttypeinfo> list = _loginBll.ShowProducttype();
+          
             return list;
         }
 
@@ -249,6 +268,8 @@ namespace IOT_Project_Api.Controllers
                                                      on b.ProductId equals c.ProductId
                                                      join d in ShowProducttype() on
                                                      c.ProductTypeId equals d.ProductTypeId
+                                                     join e in ShowPicture() on
+                                                     c.ProductId equals e.ProId
                                                      select new CustAndOrderAndPro
                                                      {
                                                          Uid = s.UserId,
@@ -274,7 +295,8 @@ namespace IOT_Project_Api.Controllers
                                                          ProductDealamount = c.ProductDealamount,
                                                          ProductLookamount = c.ProductLookamount,
                                                          ProductStoretime = c.ProductStoretime,
-                                                         ProductTypeName = d.ProductTypeName
+                                                         ProductTypeName = d.ProductTypeName,
+                                                         Picture=e.Picture
                                                      }).ToList();
                     return list;
                 }
@@ -381,6 +403,8 @@ namespace IOT_Project_Api.Controllers
 
         public int ProductTypeId { get; set; }
         public string ProductTypeName { get; set; }
+
+        public string Picture { get; set; }
 
     }
 }

@@ -37,10 +37,10 @@
             </div>
         </div>
     </div>
-    <a href="#" onclick="updateUser()">修改个人信息</a>
+    <a href="#" class="btn btn-info" onclick="updateUser()">修改个人信息</a>
     @*//<a href="#" onclick="">以往购买的商品</a>*@
     <form action="">
-        <div>
+        <div style="width:80%;margin-left:150px">
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -52,23 +52,23 @@
                         <th>用户级别</th>
                         <th>住址</th>
                         <th>用户邮箱</th>
+                      
                     </tr>
                 </thead>
                 <tbody id="tbody">
                 </tbody>
             </table>
+   
         </div>
     </form>
-
+    
     <script>
-        Vue.http.get('http://localhost:50784/api/Login/ShowCustromer?token=' + localStorage["Mylocal"]).then(function (data) {
-            if (data == null) {
-                alert("用户是否还没注册或者失败");
-            }
-            else {
-                var str = "";
+        Vue.http.get('http://localhost:50784/api/Login/ShowCustromer?token=' + localStorage["Mylocal"],).then(function (data) {
+            if (data != null) {
+                 var str = "";
+             
                 $(data.body).each(function () {
-                    str += "<tr>";
+                    str += "<tr>";                   
                     str += "<td>" + this.userName + "</td>";
                     str += "<td>" + this.userSex + "</td>";
                     str += "<td>" + this.userRealName + "</td>";
@@ -76,10 +76,15 @@
                     str += "<td>" + timeFormatter(this.userBirthday) + "</td>";
                     str += "<td>" + this.userLevel + "</td>";
                     str += "<td>" + this.userAddress + "</td>";
-                    str += "<td>" + this.userEmail + "</td>";
-                    str += "/<tr>";
+                    str += "<td>" + this.userEmail + "</td>";                   
+                    str += "</tr>";
                 });
+                
                 $("#tbody").append(str);
+             
+            }
+            else {
+                  alert("用户是否还没注册或者失败");
             }
         })
 

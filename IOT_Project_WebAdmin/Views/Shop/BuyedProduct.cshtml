@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div>
+    <div style="width:80%;margin-left:150px">
         <table class="layui-table">
             <thead>
                 <tr>
@@ -44,6 +44,7 @@
                     <th>收货地址</th>
                     <th>备注</th>
                     <th>下单日期</th>
+                    <th>商品图片</th>
                 </tr>
             </thead>
             <tbody id="tbodys">
@@ -58,7 +59,7 @@
             dataType: "json",
             type: "get",
             success: function (res) {
-                if (res == null) {
+                if (res == "") {
                      alert("用户是否还没注册或者失败");
                 }
                 else {
@@ -72,8 +73,9 @@
                     str += "<td>" + n.paymethod + "</td>";
                     str += "<td>" + n.postmethod + "</td>";
                     str += "<td>" + n.receveraddr + "</td>";
-                     str += "<td>" + n.memo + "</td>";
-                    str += "<td>" +timeFormatter( n.orderdate) + "</td>";
+                    str += "<td>" + n.memo + "</td>";
+                    str += "<td>" + timeFormatter(n.orderdate) + "</td>";
+                    str += "<td><img src='/img/"+ n.picture + "' style='width:80px;height:80px' /></td>";
                     str += "</tr>";
                 });
                 $("#tbodys").append(str);
@@ -81,7 +83,7 @@
 
             }
         })
-
+        
         function timeFormatter(value) {
         //parseInt(value.replace("/Date(", "").replace(")/", "").split("+")[0])
         var da = new Date(value);
