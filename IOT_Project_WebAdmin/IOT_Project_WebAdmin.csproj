@@ -5,8 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="axios.js" Version="0.18.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="vue" Version="2.6.11" />
     <PackageReference Include="vue.js" Version="1.0.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\1.jpg" />
+    <None Include="wwwroot\img\02.jpg" />
+    <None Include="wwwroot\img\16.jpg" />
+    <None Include="wwwroot\img\23.jpg" />
+    <None Include="wwwroot\img\29.jpg" />
+    <None Include="wwwroot\img\37.jpg" />
+    <None Include="wwwroot\img\4.jpg" />
+    <None Include="wwwroot\img\6.jpg" />
   </ItemGroup>
 
 

@@ -1,0 +1,453 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width" />
+    @*<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>*@
+    <script src="~/vue/vue.js"></script>
+    <script src="~/vue/axios.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    <title>BuyedProduct</title>
+    <link href="~/shopindex/static/css/main.css" rel="stylesheet" />
+    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/shopindex/layui/layui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link id="layuicss-layer" rel="stylesheet" href="http://demo.cssmoban.com/cssthemes5/ccpt_5_bbh/res/layui/css/modules/layer/default/layer.css?v=3.1.1" media="all">
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial;
+            padding: 10px;
+            background: #f1f1f1;
+        }
+
+        /* 头部标题 */
+        .header {
+            padding: 30px;
+            text-align: center;
+        }
+
+            .header h1 {
+                font-size: 50px;
+            }
+
+        /* 搜索框 */
+        .bar {
+            background-color: #74b4cb;
+            background-image: -webkit-linear-gradient(top);
+            background-image: -moz-linear-gradient(top);
+            background-image: linear-gradient(top);
+            box-shadow: 0 1px 1px #74b4cb;
+            border-radius: 2px;
+            width: 350px;
+            margin: 20px auto 20px;
+            position: relative;
+            float: right;
+        }
+
+            .bar input {
+                float: left;
+                background: #fff no-repeat 13px 13px;
+                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkU5NEY0RTlFMTA4NzExRTM5RTEzQkFBQzMyRjkyQzVBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkU5NEY0RTlGMTA4NzExRTM5RTEzQkFBQzMyRjkyQzVBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTk0RjRFOUMxMDg3MTFFMzlFMTNCQUFDMzJGOTJDNUEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTk0RjRFOUQxMDg3MTFFMzlFMTNCQUFDMzJGOTJDNUEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4DjA/RAAABK0lEQVR42pTSQUdEURjG8dOY0TqmPkGmRcqYD9CmzZAWJRHVRIa0iFYtM6uofYaiEW2SRJtEi9YxIklp07ZkWswu0v/wnByve7vm5ee8M+85zz1jbt9Os+WiGkYdYxjCOx5wgFeXUHmtBSzpcCGa+5BJTCjEP+0nKWAT8xqe4ArPGEEVC1hHEbs2oBwdXkM7mj/JLZrad437sCGHOfUtcziutuYu2v8XUFF/4f6vMK/YgAH1HxkBYV60AR31gxkBYd6xAeF3VzMCwvzOBpypX8V4yuFRzX2d2gD/l5yjH4fYQEnzkj4fae5rJulF2sMXVrAsaTWttRFu4Osb+1jEDT71/ZveyhouTch2fINQL9hKefKjuYFfuznXWzXMTabyrvfyIV3M4vhXgAEAUMs7K0J9UJAAAAAASUVORK5CYII=);
+                border: none;
+                width: 100%;
+                line-height: 19px;
+                padding: 11px 5px;
+                border-radius: 2px;
+                box-shadow: 0 2px 8px #c4c4c4 inset;
+                text-align: left;
+                font-size: 14px;
+                font-family: inherit;
+                color: #738289;
+                font-weight: bold;
+                outline: none;
+                text-indent: 40px;
+            }
+
+        ul {
+            width: 400px;
+            margin: 50px 20px;
+            text-align: left;
+        }
+
+            ul li {
+                border-bottom: 1px solid #ddd;
+                padding: 10px 10px;
+                float: left;
+                overflow: hidden;
+            }
+
+                ul li img {
+                    width: 60px;
+                    height: 60px;
+                    float: left;
+                    border: none;
+                }
+
+                ul li p {
+                    margin-left: 55px;
+                    font-weight: bold;
+                    padding-top: 12px;
+                    color: #6e7a7f;
+                }
+
+        /* 导航条 */
+        .topnav {
+            width: 100%;
+            overflow: hidden;
+            background-color: #c4c4c4;
+        }
+
+        .abiaoqian {
+            margin-left: 200px;
+        }
+
+            /* 导航条链接 */
+            .abiaoqian a {
+                float: left;
+                display: block;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                /* 链接颜色修改 */
+                .abiaoqian a:hover {
+                    background-color: #f7c7f0;
+                    color: #74b4cb;
+                }
+
+        /* 轮播图 */
+        ul li {
+            list-style: none;
+        }
+
+        .dian {
+            padding-top: 0px;
+            display: flex;
+            position: absolute;
+            bottom: 10px;
+        }
+
+            .dian li {
+                padding-top: 0px;
+                margin-top: 0px;
+                width: 20px;
+                height: 20px;
+                background: #fff;
+                margin: 10px 10px;
+                border-radius: 50%;
+            }
+
+                .dian li.active {
+                    padding-top: 0px;
+                    margin-top: 0px;
+                    background: blue;
+                }
+
+        .main {
+            margin-top: 0px;
+            width: 1100px;
+            height: 400px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+        }
+
+            .main img {
+                margin-top: 4px;
+                padding-top: 3px;
+                height: 400px;
+                width: 1100px;
+            }
+
+        /* 新品首发 */
+        .zhong {
+            padding: 30px;
+            text-align: center;
+        }
+
+            .zhong h1 {
+                font-size: 50px;
+            }
+
+        /* 商品图 */
+        #box ul {
+            width: 1000px;
+            margin: 50px 30px;
+            text-align: right;
+        }
+
+            #box ul li {
+                border-bottom: 1px solid #ddd;
+                padding: 30px;
+                float: left;
+                overflow: hidden;
+                list-style: none;
+            }
+
+                #box ul li img {
+                    width: 200px;
+                    height: 200px;
+                    float: right;
+                    border: none;
+                }
+    </style>
+
+    <style>
+        /* 打折促销 */
+        .dazhe {
+            padding-bottom: 10px;
+            text-align: left;
+        }
+
+        .zhong h1 {
+            font-size: 50px;
+        }
+
+        /* 商品图 */
+        #shop ul {
+            width: 1000px;
+            margin: 50px 30px;
+            text-align: right;
+        }
+
+            #shop ul li {
+                border-bottom: 1px solid #ddd;
+                padding: 30px;
+                float: right;
+                overflow: hidden;
+            }
+
+                #shop ul li img {
+                    width: 200px;
+                    height: 200px;
+                    float: right;
+                    border: none;
+                }
+    </style>
+
+
+</head>
+<body>
+    <div class="site-nav-bg" style="height:40px">
+        <div class="site-nav w1200">
+            <p class="sn-back-home">
+                <i class="layui-icon layui-icon-home"></i>
+                <a href="#" style="font-size:20px">首页</a>
+            </p>
+            <div class="sn-quick-menu">
+                <div class="login"><a href="/Default/Ding" style="font-size:20px">订单</a></div>
+                <div class="login"><a href="RegisterIndex.html" style="font-size:20px">注册</a></div>
+                <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="header">
+        <h1>💟商城首页💟</h1>
+    </div>
+    <div style="float:right;width:100%">
+        <form id="main" v-cloak>
+            <div class="bar">
+                <!-- searchString 模型与文本域创建绑定 -->
+                <input type="text" v-model="searchString" placeholder="请输入你喜欢的内容" />
+            </div>
+
+        </form>
+    </div>
+
+    <div class="topnav">
+        <div class="abiaoqian">
+            <a href="http://localhost:50812/default/show">爱家居</a>
+            <a href="http://localhost:50812/default/show">爱美食</a>
+            <a href="http://localhost:50812/default/show">爱装饰</a>
+            <a href="http://localhost:50812/default/show">爱饰品</a>
+        </div>
+
+    </div>
+
+
+    <div id="app">
+        <div class="main">
+            <img :src="item" v-for="(item, i) in list" v-show="i===activeIndex">
+            <ul class="dian">
+                <li act="hover(i)" :class="{active:i===activeIndex}" v-for="(item, i) in list"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="zhong">
+        <h1>💕打折💕促销 </h1>
+    </div>
+    <div class="dazhe">
+
+        <div id="box">
+            <ul id="shoplist">
+            </ul>
+        </div>
+
+    </div>
+
+
+
+    @*<script>
+            var demo = new Vue({
+                el: '#main',
+                data: {
+                    searchString: "",
+                    // 数据模型，实际环境你可以根据 Ajax 来获取
+                    articles: [
+                        {
+                            "title": "纯洁玫瑰",
+                            "url": "https://www.runoob.com/css/css-tutorial.html",
+                            "image": "/img/0.jpg"
+                        },
+                        {
+                            "title": "网红甜品",
+                            "url": "https://www.runoob.com/html/html-tutorial.html",
+                            "image": "/img/4.jpg"
+                        },
+                        {
+                            "title": "温馨装饰",
+                            "url": "https://www.runoob.com/css3/css3-tutorial.html",
+                            "image": "/img/6.jpg"
+                        },
+                        {
+                            "title": "慵懒女装",
+                            "url": "https://www.runoob.com/css3/css3-tutorial.html",
+                            "image": "/img/1111.jpg"
+                        },
+                        {
+                            "title": "文艺饰品",
+                            "url": "https://www.runoob.com/css3/css3-tutorial.html",
+                            "image": "/img/10.jpg"
+                        },
+                        {
+                            "title": "暖暖少女",
+                            "url": "https://www.runoob.com/css3/css3-tutorial.html",
+                            "image": "/img/23.jpg"
+                        }
+                    ]
+                },
+                computed: {
+                    // 计算数学，匹配搜索
+                    filteredArticles: function () {
+                        var articles_array = this.articles,
+                            searchString = this.searchString;
+
+                        if (!searchString) {
+                            return articles_array;
+                        }
+
+                        searchString = searchString.trim().toLowerCase();
+
+                        articles_array = articles_array.filter(function (item) {
+                            if (item.title.toLowerCase().indexOf(searchString) !== -1) {
+                                return item;
+                            }
+                        })
+
+                        // 返回过来后的数组
+                        return articles_array;;
+                    }
+                }
+            });
+        </script>*@
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        /* 轮播图 */
+        let zyy = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    activeIndex: 0,
+                    timer: null,
+                    list: [
+                        "/img/23.jpg",
+                        "/img/02.jpg",
+                        "/img/16.jpg"
+                    ],
+                }
+            },
+            mounted() {
+                this.run()
+            },
+            methods: {
+                run() {
+                    this.timer = setInterval(() => {
+                        //设置一个定时器
+                        this.activeIndex++
+                        //让下标每秒加一实现切换效果
+                        //如果走到最后一张，让下标回到0
+                        if (this.activeIndex === this.list.length) this.activeIndex = 0
+                    }, 3000);
+                },
+                hover(i) {
+                    clearInterval(this.timer)//鼠标放上去时先移除定时器
+                    this.activeIndex = i //让当前的标签active激活
+                    this.run()  //随后再走定时器
+                }
+            },
+        })
+    </script>
+
+    <script>
+        
+        //新品描述
+        $.get('http://localhost:50784/api/default/getgoodslist?goodTypeId=0&goodName=', function (res) {
+            console.log(res);
+
+            var html = "";
+            $.each(res, function (i, v) {
+                html += '<a href="/Default/Show?goodId=' + v.productId + '">';
+                html += '<li>';
+                $.each(v.productImgs, function (i, s) {
+                    html += '<img src="/img/' + s.picture + '" >';
+                })
+                html += '<h6>' + v.productName + '</h6>';
+                html += '<p style="color:red">' + v.productPrice + '</p>';
+                html += '</li>';
+                html += '</a>';
+            });
+            $("#shoplist").append(html);
+        });
+        $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
+            if (res != "购物车空空如也") {
+                $("#carnum").html(res.length);
+
+            }
+            else {
+                $("#carnum").html(0);
+            }
+
+
+        });
+            
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+

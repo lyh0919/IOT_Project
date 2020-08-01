@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 using Dapper;
 using IOT_Project_BLL.ShopCar;
 using IOT_Project_Model;
-using IOT_Project_BLL.Login;
 
 namespace IOT_Project_Api
 {
@@ -31,19 +30,17 @@ namespace IOT_Project_Api
         {
             services.AddControllers();
 
-            services.AddScoped<IDataAccess<Productinfo>, DataAccess<Productinfo>>();
+            services.AddScoped<IDataAccess<ProductInfo>, DataAccess<ProductInfo>>();
+            services.AddScoped<IDataAccess<ProductImg>, DataAccess<ProductImg>>();
             services.AddScoped<IGoodsList, GoodsList>();
 
-            services.AddScoped<ILogin,LoginBll>();
-
-            // 配置跨域处理，允许所有来源
             services.AddCors(options =>
             {
                 // Policy 名稱 CorsPolicy 是自訂的，可以自己改
                 options.AddPolicy("getd", policy =>
                 {
                     // 設定允許跨域的來源，有多個的話可以用 `,` 隔開
-                    policy.WithOrigins("http://localhost:50812", "http://localhost:50784")
+                    policy.WithOrigins("http://localhost:50784", "http://localhost:50812")
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowCredentials();
@@ -60,8 +57,11 @@ namespace IOT_Project_Api
             }
 
             app.UseRouting();
-            app.UseCors("getd");
+
             app.UseAuthorization();
+
+            app.UseCors("getd");
+            
 
             app.UseEndpoints(endpoints =>
             {

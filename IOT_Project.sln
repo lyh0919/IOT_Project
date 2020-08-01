@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOT_Project_Api", "IOT_Proj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOT_Project_WebAdmin", "IOT_Project_WebAdmin\IOT_Project_WebAdmin.csproj", "{2CD9079C-CB07-44B3-B170-77DDEDEE9852}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOT_Project_Model", "IOT_Project_Model\IOT_Project_Model.csproj", "{C21E56F2-1C36-4C3A-BC4D-43F835767596}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOT_Project_Model", "IOT_Project_Model\IOT_Project_Model.csproj", "{C21E56F2-1C36-4C3A-BC4D-43F835767596}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

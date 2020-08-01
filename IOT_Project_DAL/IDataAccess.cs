@@ -8,6 +8,11 @@ namespace IOT_Project_DAL
     {
         IEnumerable<T> ShowAll();
 
+        IEnumerable<T> ShowAll(int productId);
+
+        int AddOrder(string sql);
+
+        int UptKuCun(string sql);
 
     }
 }

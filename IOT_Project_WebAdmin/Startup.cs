@@ -46,7 +46,7 @@ namespace IOT_Project_WebAdmin
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Shop}/{action=ShopIndex}/{id?}");
+                    pattern: "{controller=Default}/{action=Index}/{id?}");
             });
         }
     }

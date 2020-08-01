@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewData["Title"] = "Ding";
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width" />
+    @*<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>*@
+    <script src="~/vue/vue.js"></script>
+    <script src="~/vue/axios.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    <title></title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/shopindex/static/css/main.css" rel="stylesheet" />
+    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/shopindex/layui/layui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link id="layuicss-layer" rel="stylesheet" href="http://demo.cssmoban.com/cssthemes5/ccpt_5_bbh/res/layui/css/modules/layer/default/layer.css?v=3.1.1" media="all">
+</head>
+<body>
+
+    <div class="site-nav-bg" style="height:40px">
+        <div class="site-nav w1200">
+            <p class="sn-back-home">
+                <i class="layui-icon layui-icon-home"></i>
+                <a href="#" style="font-size:20px">首页</a>
+            </p>
+            <div class="sn-quick-menu">
+                <div class="login"><a href="/Default/Ding" style="font-size:20px">订单</a></div>
+                <div class="login"><a href="RegisterIndex.html" style="font-size:20px">注册</a></div>
+                <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">订单列表</h3>
+            </div>
+        </div>
+
+        <table class="table" style='text-align: center'>
+            <thead>
+                <tr>
+                    <td>选择</td>
+                    <td>订单编号</td>
+                    <td>客户编号</td>
+                    <td>下单日期</td>
+                    <td>总订购数量</td>
+                    <td>留言</td>
+                    <td>送货方式</td>
+                    <td>支付方式</td>
+                    <td>收货人姓名</td>
+                    <td>收货地址</td>
+                    <td>收货人手机号</td>
+                    <td>备注</td>
+                    <td>总价</td>
+                    <td>操作</td>
+
+                </tr>
+            </thead>
+            <tbody class='table-striped nth-child table-hover'>
+
+                <tr v-for='item in goodlist' :key='item.id'>
+                    <td><input type="checkbox" click='item.selected=!item.selected'></td>
+                    <td>{{item.OrderId}}</td>
+                    <td>{{item.UserId}}</td>
+                    <td>{{item.Orderdate}}</td>
+                    <td>{{item.Orderamount}}</td>
+                    <td>{{item.message}}</td>
+                    <td>{{item.postmethod}}</td>
+                    <td>{{item.paymethod}}</td>
+                    <td>{{item.recevername}}</td>
+                    <td>{{item.receveraddr}}</td>
+                    <td>{{item.recevertel}}</td>
+                    <td>{{item.memo}}</td>
+                    <td>{{item.price*item.num}}</td>
+                    <td><a href="javascript:;" click="del(item.id)">删除</a><a href="http://localhost:50812/Default/Xq">详情</a></td>
+                    @*<p>总价:  {{totalprice}}  元</p>*@
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                goodlist: [
+                    { 'id': 1, 'OrderId': 't1183', 'UserId': '2020/7/25', 'Orderdate': '洗洁精', 'Orderamount': 80, 'message': '要快噢', 'postmethod': '顺丰', 'paymethod': '支付宝', 'recevername': '张三', 'receveraddr': '上海市奉贤区', 'recevertel': '12626633255', 'memo': '一定要质量好', 'selected': false },
+                    { 'id': 2, 'OrderId': 't1183', 'UserId': '2020/7/25', 'Orderdate': '洗洁精', 'Orderamount': 80, 'message': '要快噢', 'postmethod': '圆通', 'paymethod': '微信', 'recevername': '张三', 'receveraddr': '上海市奉贤区', 'recevertel': '12626633255', 'memo': '一定要质量好', 'selected': false },
+                    { 'id': 3, 'OrderId': 't1183', 'UserId': '2020/7/25', 'Orderdate': '洗洁精', 'Orderamount': 80, 'message': '要快噢', 'postmethod': '顺丰', 'paymethod': '支付宝', 'recevername': '里斯', 'receveraddr': '上海市奉贤区', 'recevertel': '12626633255', 'memo': '一定要质量好', 'selected': false },
+                    { 'id': 4, 'OrderId': 't1183', 'UserId': '2020/7/25', 'Orderdate': '洗洁精', 'Orderamount': 80, 'message': '要快噢', 'postmethod': '圆通', 'paymethod': '微信', 'recevername': '里斯', 'receveraddr': '上海市奉贤区', 'recevertel': '12626633255', 'memo': '一定要质量好', 'selected': false },
+                ],
+                totalprice: '234'
+            },
+            methods: {
+                //删除数据
+                del(id) {
+                    var index = this.goodlist.some((item, i) => {
+                        if (item.id == i) {
+                            return true;
+                        }
+                    });
+                    this.goodlist.splice(index, 1);
+                }
+            }
+            //computed超好用啊
+            //,computed: {
+            //    'totalprice': function () {
+            //        this.totalprice = 0;
+            //        //在计算总价的时候，由于必须即时变化价格，需要用到computed监听数据，更重要的是需要遍历每一个选中项，把他们求和
+            //        for (var i = 0; i < this.goodlist.length; i++) {
+            //            if (this.goodlist[i].selected) {
+            //                this.totalprice += this.goodlist[i].price * this.goodlist[i].num;
+            //            }
+            //        }
+            //        return this.totalprice;
+            //    }
+            //}
+        })
+    </script>
+
+</body>
+</html >
