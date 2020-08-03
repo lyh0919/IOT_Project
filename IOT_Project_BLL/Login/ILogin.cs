@@ -25,7 +25,7 @@ namespace IOT_Project_BLL.Login
 
         List<Orderdetail> ShowOrderdetial();
 
-        List<Productinfo> ShowProductinfo();
+        List<ProductInfo> ShowProductinfo();
 
         List<producttypeinfo> ShowProducttype();
 

@@ -84,12 +84,12 @@ namespace IOT_Project_BLL.Login
           
         }
 
-        public List<Productinfo> ShowProductinfo()
+        public List<ProductInfo> ShowProductinfo()
         {
             using (SqlConnection db = new SqlConnection(conn))
             {
                 string sql = $"select * from Productinfo";
-                return db.Query<Productinfo>(sql).ToList();
+                return db.Query<ProductInfo>(sql).ToList();
             }
         }
 

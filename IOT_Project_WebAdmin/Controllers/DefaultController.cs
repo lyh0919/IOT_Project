@@ -8,11 +8,17 @@ namespace IOT_Project_WebAdmin.Controllers
 {
     public class DefaultController : Controller
     {
-        //首页显示
+        //游客首页显示
         public IActionResult Index()
         {
             return View();
         }
+
+        public IActionResult CusIndex()
+        {
+            return View();
+        }
+
         //详情页
         public IActionResult Show()
         {
@@ -34,6 +40,12 @@ namespace IOT_Project_WebAdmin.Controllers
         {
             return View();
         }
-        
+
+
+        public IActionResult BuyShop()
+        {
+            return View();
+        }
+
     }
 }

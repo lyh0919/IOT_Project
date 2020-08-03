@@ -10,15 +10,17 @@
     <meta name="viewport" content="width=device-width" />
     <title>个人信息查看汇总</title>
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/shopindex/layui/layui.js"></script>
+    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
     <script src="~/vue/vue.js"></script>
 
     <script src="~/vue/vue-resource.js"></script>
- 
+
     <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
     <link href="~/shopindex/static/css/main.css" rel="stylesheet" />
-    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
 
-    <script src="~/shopindex/layui/layui.js"></script>
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <link id="layuicss-layer" rel="stylesheet" href="http://demo.cssmoban.com/cssthemes5/ccpt_5_bbh/res/layui/css/modules/layer/default/layer.css?v=3.1.1" media="all">
@@ -29,15 +31,15 @@
         <div class="site-nav w1200">
             <p class="sn-back-home">
                 <i class="layui-icon layui-icon-home"></i>
-                <a href="#" style="font-size:20px">首页</a>
+                <a href="/Default/Index" style="font-size:20px">首页</a>
             </p>
             <div class="sn-quick-menu">
                 <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
-                <div class="sp-cart"><a href="shopcart.html" style="font-size:20px">购物车</a><span>2</span></div>
+                <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
             </div>
         </div>
     </div>
-    <a href="#" class="btn btn-info" onclick="updateUser()">修改个人信息</a>
+   
     @*//<a href="#" onclick="">以往购买的商品</a>*@
     <form action="">
         <div style="width:80%;margin-left:150px">
@@ -52,6 +54,7 @@
                         <th>用户级别</th>
                         <th>住址</th>
                         <th>用户邮箱</th>
+                        <th>操作</th>
                       
                     </tr>
                 </thead>
@@ -63,6 +66,16 @@
     </form>
     
     <script>
+        $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
+            if (res != "购物车空空如也") {
+                $("#carnum").html(res.length);
+            }
+            else {
+                $("#carnum").html(0);
+            }
+
+
+        });
         Vue.http.get('http://localhost:50784/api/Login/ShowCustromer?token=' + localStorage["Mylocal"],).then(function (data) {
             if (data != null) {
                  var str = "";
@@ -76,7 +89,9 @@
                     str += "<td>" + timeFormatter(this.userBirthday) + "</td>";
                     str += "<td>" + this.userLevel + "</td>";
                     str += "<td>" + this.userAddress + "</td>";
-                    str += "<td>" + this.userEmail + "</td>";                   
+                    str += "<td>" + this.userEmail + "</td>";
+                    str += "<td> <a href='#' class='layui-btn layui-btn-primary layui-btn-xs' onclick='updateUser()'>修改个人信息</a></td>";  
+                    
                     str += "</tr>";
                 });
                 
@@ -94,9 +109,9 @@
             layui.use('layer', function () {
                 layer.open({
                     type: 2,
-                    content: '/Login/UpdateRegister'
+                    content: '/Shop/UpdateRegister'
                     ,   //添加页，后台controller转发到指定页
-                    area: ["800px", "600px"]
+                    area: ["1000px", "800px"]
                     , fixed: false,
                     //maxmin: true,
                     shadeClose: true

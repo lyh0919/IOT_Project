@@ -201,9 +201,9 @@ namespace IOT_Project_Api.Controllers
         }
 
         [HttpGet]
-        public List<Productinfo> ShowProductInfo()
+        public List<ProductInfo> ShowProductInfo()
         {
-            List<Productinfo> list = _loginBll.ShowProductinfo();
+            List<ProductInfo> list = _loginBll.ShowProductinfo();
             return list;
         }
 
@@ -315,10 +315,15 @@ namespace IOT_Project_Api.Controllers
 
 
 
+        public List<CustAndOrderAndPro> LookInfoName(string token,string name)
+        {
+            List<CustAndOrderAndPro> list = ShowAll(token);
+            list = list.Where(s => s.FOrderId.Contains(name)).ToList();
+            return list;
+        }
 
 
 
-     
     }
   public  class CustomerAndOrder
     {
@@ -344,7 +349,7 @@ namespace IOT_Project_Api.Controllers
         public string Receveraddr { get; set; }
         public string Recevertel { get; set; }
         public string Memo { get; set; }
-        public string Totalprice { get; set; }
+        public decimal Totalprice { get; set; }
     }
 
 
@@ -375,7 +380,7 @@ namespace IOT_Project_Api.Controllers
         public string Receveraddr { get; set; }
         public string Recevertel { get; set; }
         public string Memo { get; set; }
-        public string Totalprice { get; set; }
+        public decimal Totalprice { get; set; }
 
         //订单详情
         public int Odid{ get; set; }
@@ -393,7 +398,7 @@ namespace IOT_Project_Api.Controllers
         public string ProductName { get; set; }
         public int Storage { get; set; }
         public int ProductAmount { get; set; }
-        public string ProductPrice { get; set; }
+        public decimal ProductPrice { get; set; }
         public string ProductDPrice { get; set; }
         public decimal ProductDiscount { get; set; }
         public int ProductDealamount { get; set; }

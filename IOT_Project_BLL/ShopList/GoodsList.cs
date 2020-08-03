@@ -43,6 +43,16 @@ namespace IOT_Project_BLL.ShopCar
             return _data.AddOrder(sql);
         }
 
+
+        public int AddOrderOne(OrderInfo order, Orderdetail orderdetail)
+        {
+            string sql = $"insert into OrderInfo values('{order.OrderId}','{order.UserId}','{order.Orderdate}','{order.Orderamount}','{order.Message}','{order.Postmethod}','{order.Paymethod}','{order.Recevername}','{order.Receveraddr}','{order.Recevertel}','{order.Memo}','{order.Totalprice}') ";
+
+            sql += $"insert into Orderdetail values('{orderdetail.OrderDetailId}','{orderdetail.OrderId}','{orderdetail.ProductId}','{orderdetail.Orderamount}','{orderdetail.Poststatus}','{orderdetail.Recevstatus}','{orderdetail.Saletotalprice}') ";
+
+
+            return _data.AddOrder(sql);
+        }
         public int UptKuCun(List<ProductInfo> kucun)
         {
             string sql = "";
@@ -50,6 +60,15 @@ namespace IOT_Project_BLL.ShopCar
             {
                 sql += $"update ProductInfo set ProductAmount = ProductAmount - {item.ProductAmount} where ProductId = {item.ProductId} ";
             }
+            return _data.UptKuCun(sql);
+        }
+
+        public int UptKuCunOne(int goodId, int buycount)
+        {
+            string sql = "";
+
+            sql += $"update ProductInfo set ProductAmount = ProductAmount - {buycount} where ProductId = {goodId} ";
+
             return _data.UptKuCun(sql);
         }
     }

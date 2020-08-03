@@ -13,5 +13,7 @@ namespace IOT_Project_BLL.ShopCar
 
         int AddOrder(OrderInfo order,List<Orderdetail> orderdetails);
         int UptKuCun(List<ProductInfo> kucun);
+        int UptKuCunOne(int goodId, int buycount);
+        int  AddOrderOne(OrderInfo order, Orderdetail orderdetail);
     }
 }
