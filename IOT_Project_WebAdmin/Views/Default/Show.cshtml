@@ -9,7 +9,7 @@
 
 <style>
     .box {
-        width: 600px;
+        width: 580px;
         height: 600px;
         margin: auto;
         margin-top: 100px;
@@ -17,18 +17,18 @@
 
     .box1 {
         width: 300px;
-        height: 400px;
+        height: 300px;
         float: left;
     }
 
         .box1 img {
             width: 300px;
-            height: 400px;
+            height: 300px;
         }
 
     .box2 {
         width: 250px;
-        height: 600px;
+        height: 300px;
         float: left;
         margin-left: 20px;
     }
@@ -61,29 +61,33 @@
             <a href="/Default/Index" style="font-size:20px">首页</a>
         </p>
         <div class="sn-quick-menu">
-            <div class="login"><a href="RegisterIndex.html" style="font-size:20px">注册</a></div>
-            <div class="login"><a href="/Shop/ShopIndex" style="font-size:20px">登录</a></div>
+            <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
             <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
         </div>
     </div>
 </div>
 
 <div class="box">
-    <div class="box1">
-    </div>
-    <div class="box2">
-        <p id="productname"></p>
-        <p id="price"></p>
-        <div id="put">
-            <span class="jian" id="jian">-</span>
-            <input type="text" value="1" id="num" style="width:50px;text-align:center;height:22px;" />
-            <span class="jia" id="jia">+</span>
+    <div>
+        <div class="box1">
         </div>
-        <p>
-            <input type="button" value="购买" class="btn btn-info" id="buy" />
-            <input type="button" value="加入购物车" class="btn btn-success" id="shopcar" />
-        </p>
+        <div class="box2">
+            商品名称:<p id="productname"></p>
+            商品单价:<p id="price"></p>
+            <div id="put">
+                <span class="jian" id="jian">-</span>
+                <input type="text" value="1" id="num" style="width:30px;text-align:center;height:28px;" />
+                <span class="jia" id="jia">+</span>
+            </div>
+            <p>
+                <input type="button" value="购买" class="btn btn-info" id="buy" />
+                <input type="button" value="加入购物车" class="btn btn-success" id="shopcar" />
+            </p>
+        </div>
     </div>
+
+   
+
 </div>
 
 
@@ -137,9 +141,6 @@
     }
 
     $("#shopcar").click(function () {
-        if (localStorage["Mylocal"] == null) {
-            location.href = "/Shop/ShopIndex";
-        }
         var num = $("#num").val();
         $.get('http://localhost:50784/api/shopcar/addcar?goodId=' + id + '&goodNum=' + num, function (res) {
             alert(res);
@@ -163,8 +164,20 @@
         location.href = "/Default/BuyShop?goodId=" + id + '&buycount=' + num;
     });
 
-    
-    
+    //new Vue({
+    //    el: "#app",
+    //    data() {
+    //        return {
+    //            info: ""
+    //        }
+    //    },
+    //    methods: {
+    //        add: function () {
+    //            this.info = "用户名称：" + this.Username + "\r\n留言类型："
+    //                + this.MessageType + "\r\n留言：" + this.Messagecontent;
+    //        }
+    //    }
+    //})
 
 </script>
 

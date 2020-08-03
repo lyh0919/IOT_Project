@@ -48,16 +48,56 @@
 
 </div>
 <div style="margin:auto;width:1000px;clear:both">
-    
     <input type="button" value="结算" id="jiesuan" style="float:right" class="btn btn-success" />
 </div>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script>
-        $(function () {
-            ShowLoad();
-            $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
-                if (res != "购物车空空如也") {
-                    $("#carnum").html(res.length);
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(function () {
+        ShowLoad();
+        $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
+            if (res != "购物车空空如也") {
+                $("#carnum").html(res.length);
+            }
+            else {
+                $("#carnum").html(0);
+            }
+
+
+        });
+    });
+    function ShowLoad() {
+        $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
+            if (res != "购物车空空如也") {
+                var html = "";
+                var totalprice = 0;
+                var totalcount = 0;
+                $.each(res, function (i, v) {
+                    html += '<tr>';
+                    $.each(v.productImgs, function (i, s) {
+                        html += '<td><img src="/img/' + s.picture + '" style="width:100px;height:100px" ></td>';
+                    })
+                    html += '<td>' + v.productName + '</td>';
+                    html += '<td>' + v.productPrice + '</td>';
+                    html += '<td>' + v.productAmount + '</td>';
+                    html += '<td>' + (v.productPrice * v.productAmount) + '</td>';
+                    html += '<td><a href="#" onclick=Del("' + v.productId + '") > 删除</a></td >';
+                    html += '</tr>';
+                    totalcount += v.productAmount;
+                    totalprice += (v.productPrice * v.productAmount);
+                });
+                $("#dt").append(html);
+                $("#totalprice").html(totalprice);
+                $("#totalcount").val(totalcount);
+            }
+        });
+    }
+
+
+    function Del(id) {
+        if (confirm("确认从购物车删除吗")) {
+            $.get('http://localhost:50784/api/shopcar/deleteshopcarone?goodId=' + id, function (res) {
+                if (res == 1) {
+                    ShowLoad();
                 }
                 else {
                     $("#carnum").html(0);
@@ -65,61 +105,22 @@
 
 
             });
-        });
-        function ShowLoad() {
-            $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
-                if (res != "购物车空空如也") {
-                    var html = "";
-                    var totalprice = 0;
-                    var totalcount = 0;
-                    $.each(res, function (i, v) {
-                        html += '<tr>';
-                        $.each(v.productImgs, function (i, s) {
-                            html += '<td><img src="/img/' + s.picture + '" style="width:100px;height:100px" ></td>';
-                        })
-                        html += '<td>' + v.productName + '</td>';
-                        html += '<td>' + v.productPrice + '</td>';
-                        html += '<td>' + v.productAmount + '</td>';
-                        html += '<td>' + (v.productPrice * v.productAmount) + '</td>';
-                        html += '<td><a href="#" onclick=Del("' + v.productId + '")>删除</td >';
-                        html += '</tr>';
-                        totalcount += v.productAmount;
-                        totalprice += (v.productPrice * v.productAmount);
-                    });
-                    $("#dt").append(html);
-                    $("#totalprice").html(totalprice);
-                    $("#totalcount").val(totalcount);
-                }
-            });
         }
-        
 
-        function Del(id) {
-            if (confirm("确认从购物车删除吗")) {
-                $.get('http://localhost:50784/api/shopcar/deleteshopcarone?goodId=' + id, function (res) {
-                    if (res == 1) {
-                        ShowLoad();
-                    }
-                    else {
-                        $("#carnum").html(0);
-                    }
+    }
 
 
-                });
+
+    var token = localStorage["Mylocal"];
+    $("#jiesuan").click(function () {
+        $.get('http://localhost:50784/api/shopcar/clearcar?token=' + token + '&totalcount=' + $("#totalcount").val() + '&price=' + $("#totalprice").text(), function (res) {
+            if (res == 1) {
+                alert("下单成功");
+                location.href = "/Default/Index";
             }
-            
-        }
-
-        
-
-        var token = localStorage["Mylocal"];
-        $("#jiesuan").click(function () {
-            $.get('http://localhost:50784/api/shopcar/clearcar?token=' + token + '&totalcount=' + $("#totalcount").val() + '&price=' + $("#totalprice").text(), function (res) {
-                if (res == 1) {
-                    alert("下单成功");
-                    location.href = "/Default/Index";
-                }
-            });
         });
-    </script>
+    });
+
+
+</script>
 

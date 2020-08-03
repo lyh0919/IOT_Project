@@ -26,11 +26,12 @@
         <div class="site-nav w1200">
             <p class="sn-back-home">
                 <i class="layui-icon layui-icon-home"></i>
-                <a href="#" style="font-size:20px">首页</a>
+                <a href="/Default/Index" style="font-size:20px">首页</a>
             </p>
             <div class="sn-quick-menu">
-                <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
-                <div class="sp-cart"><a href="shopcart.html" style="font-size:20px">购物车</a><span>2</span></div>
+
+                <div class="login"><a href="/Shop/ShopIndex" style="font-size:20px">登录</a></div>
+                <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
             </div>
         </div>
     </div>
@@ -87,36 +88,12 @@
                         <label class="layui-form-label">家庭住址:</label>
                         <div class="layui-input-block">
                             <div class="layui-inline" id="typename">
-                                <select name="Province" id="xm1" lay-verify="required" lay-filter="xmFilter">
-                                    <option value="1">北京市</option>
-                                    <option value="2">天津市</option>
-                                    <option value="3">河北省</option>
-                                    <option value="4">山西省</option>
-                                    <option value="5">辽宁省</option>
-                                </select>
-                            </div>
-                            <div class="layui-inline" id="typename">
-                                <select name="City" id="xm2" lay-verify="required" lay-filter="xmFilter">
-                                    <option value="6">石家庄市</option>
-                                    <option value="7">唐山市</option>
-                                    <option value="8">秦皇岛市</option>
-                                    <option value="9">邢台市</option>
-                                    <option value="10">张家口市</option>
-                                </select>
-                            </div>
-                            <div class="layui-inline" id="typename">
-                                <select name="Home" id="xm3" lay-verify="required" lay-filter="xmFilter">
-                                    <option value="11">开平区</option>
-                                    <option value="12">古治区</option>
-                                    <option value="13">丰南区</option>
-                                    <option value="14">丰润区</option>
-                                    <option value="15">乐亭县</option>
-                                </select>
-                            </div>
+                       
                             <input type="text" id="adderss" style="width:600px;height:38px" />
+                               
                         </div>
                     </div>
-
+                    </div>
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">邮箱地址:</label>

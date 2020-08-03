@@ -22,22 +22,35 @@
         <div class="site-nav w1200">
             <p class="sn-back-home">
                 <i class="layui-icon layui-icon-home"></i>
-                <a href="#" style="font-size:20px">首页</a>
+                <a href="/Default/Index" style="font-size:20px">首页</a>
             </p>
             <div class="sn-quick-menu">
-                <div class="login"><a href="RegisterIndex.html" style="font-size:20px">注册</a></div>
-                <div class="sp-cart"><a href="shopcart.html" style="font-size:20px">购物车</a><span>2</span></div>
+                <div class="login"><a href="/Shop/LookAboutUserInfo" style="font-size:20px">个人信息</a></div>
+                <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
+                <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
             </div>
         </div>
     </div>
 
+    <div class="layui-inline" style="padding-top:40px;padding-bottom:10px;float:right;width:360px;height:30px">
+        @*<div class="layui-inline" style="float:right;width:400px;height:40px"> </div>*@
+           
+        <div style="float:left">
+            <input class="layui-input" type="text" placeholder="请输入想要查询的商品编号" id="txt_Name" style="width: 270px;height: 30px;border: aliceblue;" autocomplete="off" />
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="float:right">
+            <button type="button" data-type="reload" class="layui-btn layui-btn-sm  layui-btn-normal" onclick="Search()"> <i class="layui-icon">&#xe615;</i>查询</button>
+        </div>
+                     
+       
+    </div>
     <div style="width:80%;margin-left:150px">
         <table class="layui-table">
             <thead>
                 <tr>
                     <th>订单编号</th>
                     <th>订单数量</th>
-                    <th>备注</th>
+                    <th>留言</th>
                     <th>收货人姓名</th>
                     <th>支付方式</th>
                     <th>送货方式</th>
@@ -48,47 +61,89 @@
                 </tr>
             </thead>
             <tbody id="tbodys">
-                
             </tbody>
         </table>
     </div>
 
     <script>
+        $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
+            if (res != "购物车空空如也") {
+                $("#carnum").html(res.length);
+            }
+            else {
+                $("#carnum").html(0);
+            }
+
+
+        });
         $.ajax({
-            url: "http://localhost:50784/api/Login/ShowAll?token="+localStorage["Mylocal"],
+            url: "http://localhost:50784/api/Login/ShowAll?token=" + localStorage["Mylocal"],
             dataType: "json",
             type: "get",
             success: function (res) {
                 if (res == "") {
-                     alert("用户是否还没注册或者失败");
+                    alert("用户是否还没注册或者失败");
                 }
                 else {
-                     var str = "";
-                $.each(res, function (i, n) {
-                    str += "<tr>";
-                    str += "<td>" + n.orderId + "</td>";
-                    str += "<td>" + n.orderamount + "</td>";
-                    str += "<td>" + n.message + "</td>";
-                    str += "<td>" + n.recevername + "</td>";
-                    str += "<td>" + n.paymethod + "</td>";
-                    str += "<td>" + n.postmethod + "</td>";
-                    str += "<td>" + n.receveraddr + "</td>";
-                    str += "<td>" + n.memo + "</td>";
-                    str += "<td>" + timeFormatter(n.orderdate) + "</td>";
-                    str += "<td><img src='/img/"+ n.picture + "' style='width:80px;height:80px' /></td>";
-                    str += "</tr>";
-                });
-                $("#tbodys").append(str);
+                    var str = "";
+                    $.each(res, function (i, n) {
+                        str += "<tr>";
+                        str += "<td>" + n.orderId + "</td>";
+                        str += "<td>" + n.orderamount + "</td>";
+                        str += "<td>" + n.message + "</td>";
+                        str += "<td>" + n.recevername + "</td>";
+                        str += "<td>" + n.paymethod + "</td>";
+                        str += "<td>" + n.postmethod + "</td>";
+                        str += "<td>" + n.receveraddr + "</td>";
+                        str += "<td>" + n.memo + "</td>";
+                        str += "<td>" + timeFormatter(n.orderdate) + "</td>";
+                        str += "<td><img src='/img/" + n.picture + "' style='width:80px;height:80px' /></td>";
+                        str += "</tr>";
+                    });
+                    $("#tbodys").append(str);
                 }
 
             }
         })
-        
+
         function timeFormatter(value) {
-        //parseInt(value.replace("/Date(", "").replace(")/", "").split("+")[0])
-        var da = new Date(value);
-        return da.getFullYear() + "-" + (da.getMonth() + 1) + "-" + da.getDate()/* + " " + da.getHours() + ":" + da.getMinutes() + ":" + da.getSeconds()*/;
-    }
+            //parseInt(value.replace("/Date(", "").replace(")/", "").split("+")[0])
+            var da = new Date(value);
+            return da.getFullYear() + "-" + (da.getMonth() + 1) + "-" + da.getDate()/* + " " + da.getHours() + ":" + da.getMinutes() + ":" + da.getSeconds()*/;
+        }
+
+        function Search() {
+            var txtName = $("#txt_Name").val();
+            $.ajax({
+            url: "http://localhost:50784/api/Login/LookInfoName?token=" + localStorage["Mylocal"] + "&name=" + txtName,
+            dataType: "json",
+            type: "get",
+            success: function (res) {
+                if (res == "") {
+                    alert("没有查询到此商品");
+                }
+                else {
+                    var str = "";
+                    $.each(res, function (i, n) {
+                        str += "<tr>";
+                        str += "<td>" + n.orderId + "</td>";
+                        str += "<td>" + n.orderamount + "</td>";
+                        str += "<td>" + n.message + "</td>";
+                        str += "<td>" + n.recevername + "</td>";
+                        str += "<td>" + n.paymethod + "</td>";
+                        str += "<td>" + n.postmethod + "</td>";
+                        str += "<td>" + n.receveraddr + "</td>";
+                        str += "<td>" + n.memo + "</td>";
+                        str += "<td>" + timeFormatter(n.orderdate) + "</td>";
+                        str += "<td><img src='/img/" + n.picture + "' style='width:80px;height:80px' /></td>";
+                        str += "</tr>";
+                    });
+                    $("#tbodys").append(str);
+                }
+
+            }
+        })
+        }
     </script>
 </body>
 </html>

@@ -42,6 +42,13 @@
         </tbody>
     </table>
 
+
+    <div id="app" style="margin-left:20px;padding-top:150px">
+            <h3>用户留言板：</h3>
+            <br />
+            <textarea style="width:400px;height:150px;" id="info"></textarea>
+
+        </div>
 </div>
 <div style="margin:auto;width:1000px">
     <h3 style="float:right">￥<span id="totalprice"></span></h3>
@@ -61,14 +68,14 @@
             
         });
         function ShowLoad() {
-            $.get('http://localhost:50784/api/default/getproductinfo?productId=' + id, function (res) {
+          $.get('http://localhost:50784/api/default/getproductinfo?productId=' + id, function (res) {
                 
-                var html = "";
-                var totalprice = 0;
+              var html = "";
+              var totalprice = 0;
                 html += '<tr>';
                 html += '<td>' + res.productName + '</td>';
                 html += '<td>' + res.productPrice + '</td>';
-                html += '<td>' + res.productAmount + '</td>';
+                html += '<td>' + buycount + '</td>';
                 html += '<td>' + (res.productPrice * buycount) + '</td>';
                 //html += '<td><a href="#" onclick=Del("' + v.productId + '")>删除</td >';
                 html += '</tr>';
@@ -93,7 +100,7 @@
             location.href = "/Shop/ShopIndex";
         }
 
-        $.get('http://localhost:50784/api/shopcar/buyshop?token=' + token + '&goodId=' + id + '&buycount=' + buycount, function (res) {
+        $.get('http://localhost:50784/api/shopcar/buyshop?token=' + token + '&goodId=' + id + '&buycount=' + buycount + '&mess=' + $("#info").val(), function (res) {
             if (res > 0) {
                 alert("购买成功");
             }

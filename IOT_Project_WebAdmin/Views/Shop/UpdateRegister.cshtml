@@ -19,113 +19,97 @@
 
 </head>
 <body>
-
-        <div style="text-align:center"> <h1>个人信息填写</h1></div>
-        <div style="width:80%;height:100%;margin-left:400px;margin-top:100px">
-            <div class="layui-fluid">
-                <div class="layui-card">
-                    <form class="layui-form" action="" lay-filter="component-form-group">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">用户名称:</label>
-                            <div class="layui-input-block" style="width:190px">
-                                <input type="text" name="UserName" id="UserName" autocomplete="off" placeholder="请输入用户名称" class="layui-input">
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">用户密码:</label>
-                            <div class="layui-input-block" style="width:190px">
-                                <input type="password" name="UserPwd" id="UserPwd" autocomplete="off" placeholder="请输入用户密码" class="layui-input">
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">用户真实姓名：</label>
-                            <div class="layui-input-block" style="width:190px">
-                                <input type="text" name="UserRealName" id="UserRealName" autocomplete="off" placeholder="请输入真实用户名称" class="layui-input">
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">性别</label>
-                            <div class="layui-input-block">
-                                <input type="radio" name="sex" value="男" title="男" checked="checked">
-                                <input type="radio" name="sex" value="女" title="女">
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">用户电话:</label>
-                            <div class="layui-input-block" style="width:190px">
-                                <input type="text" name="UserTel" id="UserTel" autocomplete="off" placeholder="请输入电话号码" class="layui-input">
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">出生日期</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="UserBirthday" id="UserBirthday" autocomplete="off" placeholder="yyyy-MM-dd" class="layui-input">
-                            </div>
-                        </div>
-
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">家庭住址:</label>
-                            <div class="layui-input-block">
-                                <div class="layui-inline" id="typename">
-                                    <select name="Province" id="xm1" lay-verify="required" lay-filter="xmFilter">
-                                        <option value="1">北京市</option>
-                                        <option value="2">天津市</option>
-                                        <option value="3">河北省</option>
-                                        <option value="4">山西省</option>
-                                        <option value="5">辽宁省</option>
-                                    </select>
-                                </div>
-                                <div class="layui-inline" id="typename">
-                                    <select name="City" id="xm2" lay-verify="required" lay-filter="xmFilter">
-                                        <option value="6">石家庄市</option>
-                                        <option value="7">唐山市</option>
-                                        <option value="8">秦皇岛市</option>
-                                        <option value="9">邢台市</option>
-                                        <option value="10">张家口市</option>
-                                    </select>
-                                </div>
-                                <div class="layui-inline" id="typename">
-                                    <select name="Home" id="xm3" lay-verify="required" lay-filter="xmFilter">
-                                        <option value="11">开平区</option>
-                                        <option value="12">古治区</option>
-                                        <option value="13">丰南区</option>
-                                        <option value="14">丰润区</option>
-                                        <option value="15">乐亭县</option>
-                                    </select>
-                                </div>
-                                <input type="text" id="adderss" style="width:600px;height:38px" />
-                            </div>
-                        </div>
-
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">邮箱地址:</label>
-                            <div class="layui-input-block" style="width:190px">
-                                <input type="text" name="UserEmail" id="UserEmail" autocomplete="off" placeholder="请输入邮箱" class="layui-input">
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item layui-layout-admin">
-                            <div class="layui-input-block">
-                                <div class="layui-footer" style="left: 0;padding-left:450px">
-                                    <button type="button" class="layui-btn" onclick="AddUser()">立即提交</button>
-                                    <button type="reset" class="layui-btn layui-btn-primary" onclick="ClosePage()">取消</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
+    @*<div class="site-nav-bg" style="height:40px">
+        <div class="site-nav w1000">
+            <p class="sn-back-home">
+                <i class="layui-icon layui-icon-home"></i>
+                <a href="#" style="font-size:20px">首页</a>
+            </p>
+            <div class="sn-quick-menu">
+                <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
+                <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
             </div>
         </div>
-    
+    </div>*@
+
+    <div style="text-align:center"> <h1>个人信息填写</h1></div>
+    <div style="width:80%;height:100%;margin-left:400px;margin-top:100px">
+        <div class="layui-fluid">
+            <div class="layui-card">
+                <form class="layui-form" action="" lay-filter="component-form-group">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户名称:</label>
+                        <div class="layui-input-block" style="width:190px">
+                            <input type="text" name="UserName" id="UserName" autocomplete="off" placeholder="请输入用户名称" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户密码:</label>
+                        <div class="layui-input-block" style="width:190px">
+                            <input type="password" name="UserPwd" id="UserPwd" autocomplete="off" placeholder="请输入用户密码" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户真实姓名：</label>
+                        <div class="layui-input-block" style="width:190px">
+                            <input type="text" name="UserRealName" id="UserRealName" autocomplete="off" placeholder="请输入真实用户名称" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="sex" value="男" title="男" checked="checked">
+                            <input type="radio" name="sex" value="女" title="女">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户电话:</label>
+                        <div class="layui-input-block" style="width:190px">
+                            <input type="text" name="UserTel" id="UserTel" autocomplete="off" placeholder="请输入电话号码" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">出生日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="UserBirthday" id="UserBirthday" autocomplete="off" placeholder="yyyy-MM-dd" class="layui-input">
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">家庭住址:</label>
+                        <input type="text" id="UserAddress" style="width:600px;height:38px" />
+                        @*//</div>*@
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">邮箱地址:</label>
+                        <div class="layui-input-block" style="width:190px">
+                            <input type="text" name="UserEmail" id="UserEmail" autocomplete="off" placeholder="请输入邮箱" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-layout-admin">
+                        <div class="layui-input-block">
+                            <div class="layui-footer" style="left: 0;padding-left:450px">
+                                <button type="button" class="layui-btn" onclick="AddUser()">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary" onclick="ClosePage()">取消</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
 
     <script type="text/javascript">
 
@@ -157,16 +141,17 @@
                         $("input[name='sex']").each(function () {
                             if (this.value == roleCode) {
                                 this.checked = true;
-                               
+
                             }
                         });
                         $("#UserEmail").val(n.userEmail);
                         $("#UserBirthday").val(n.userBirthday);
+                        $("#UserAddress").val(n.userAddress);
                         layui.use('form', function () {
                             var form = layui.form;
                             form.render();
                         });
-       
+
                     });
                 }
 
@@ -206,7 +191,7 @@
             obj.UserBirthday = birth;
             obj.UserAddress = address;
             obj.UserEmail = email;
-          
+
             $.ajax({
                 url: "http://localhost:50784/api/Login/UpdateUser",
                 data: { obj: JSON.stringify(obj), token: localStorage["Mylocal"] },
@@ -229,7 +214,7 @@
             });
 
         }
-         function ClosePage() {
+        function ClosePage() {
             window.close();
             location.href = "/Shop/ShopIndex";
         }

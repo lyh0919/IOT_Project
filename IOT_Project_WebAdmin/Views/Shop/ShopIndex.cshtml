@@ -23,11 +23,12 @@
         <div class="site-nav w1200">
             <p class="sn-back-home">
                 <i class="layui-icon layui-icon-home"></i>
-                <a href="#" style="font-size:20px">首页</a>
+                <a href="/Default/Index" style="font-size:20px">首页</a>
             </p>
             <div class="sn-quick-menu">
+
                 <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
-                <div class="sp-cart"><a href="shopcart.html" style="font-size:20px">购物车</a><span>2</span></div>
+                <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
             </div>
         </div>
     </div>
@@ -91,7 +92,7 @@
 
                                 </div>
                             </div>
-                            <a style="color:cornflowerblue;float:right"onclick="LookupPwd()">重置密码</a>
+                            @*<a style="color:cornflowerblue;float:right"onclick="LookupPwd()">重置密码</a>*@
                         </div>
                         <div class="layui-form-item layui-layout-admin">
                             <div class="layui-input-block">
@@ -141,7 +142,6 @@
         }).use(['jquery', 'form'], function () {
             var $ = layui.$, form = layui.form;
 
-
             //$("#LoginPage").click(function () {
             //    //if (!/^1\d{10}$/.test($("#phone").val())) {
             //    //    layer.msg("请输入正确的手机号");
@@ -153,7 +153,16 @@
             //    })
 
         });
+        $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
+            if (res != "购物车空空如也") {
+                $("#carnum").html(res.length);
+            }
+            else {
+                $("#carnum").html(0);
+            }
 
+
+        });
         function LoginPage() {
             var obj = {};
             obj.UserName =$("#UserName").val();
@@ -166,14 +175,14 @@
                 dataType: "text",//返回的
                 contentType: "application/json",
                 success: function (data) {
-                    alert(data);
+                  //  alert(data);
                     console.log(data);
                     
                     localStorage["Mylocal"] = data;
                     if (data!= "") {
                         alert("登录成功");
 
-                        location.href = "/Shop/BuyedProduct";
+                        location.href = "/Default/CusIndex";
 
 
                     } else {
@@ -188,6 +197,8 @@
         function LookupPwd() {
             location.href = "/Shop/LookInfoPwd";
         }
+
+
     </script>
 
 
