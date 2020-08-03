@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "CusIndex";
     Layout = null;
 }
 
@@ -250,7 +250,8 @@
                 <a href="#" style="font-size:20px">首页</a>
             </p>
             <div class="sn-quick-menu">
-                <div class="login"><a href="/Shop/ShopIndex" style="font-size:20px">登录</a></div>
+               
+                <div class="login"><a href="/Shop/BuyedProduct" style="font-size:20px">查看个人订单</a></div>
                 <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
                 <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
             </div>
@@ -410,7 +411,7 @@
     </script>
 
     <script>
-        
+
         //新品描述
         $.get('http://localhost:50784/api/default/getgoodslist?goodTypeId=0&goodName=', function (res) {
             console.log(res);
@@ -429,22 +430,23 @@
             });
             $("#shoplist").append(html);
         });
-        //$.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
-        //    if (res != "购物车空空如也") {
-        //        $("#carnum").html(res.length);
+        $.get('http://localhost:50784/api/shopcar/shopcarshow', function (res) {
+            if (res != "购物车空空如也") {
+                $("#carnum").html(res.length);
 
-        //    }
-        //    else {
-        //        $("#carnum").html(0);
-        //    }
+            }
+            else {
+                $("#carnum").html(0);
+            }
 
 
-        //});
-            
+        });
+
     </script>
 
 </body>
 </html>
+
 
 
 

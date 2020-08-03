@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LookInfoPwd</title>
+    <link href="~/shopindex/static/css/main.css" rel="stylesheet" />
+    <link href="~/shopindex/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/shopindex/layui/layui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link id="layuicss-layer" rel="stylesheet" href="http://demo.cssmoban.com/cssthemes5/ccpt_5_bbh/res/layui/css/modules/layer/default/layer.css?v=3.1.1" media="all">
+
+</head>
+<body>
+    <div class="site-nav-bg" style="height:40px">
+        <div class="site-nav w1000">
+            <p class="sn-back-home">
+                <i class="layui-icon layui-icon-home"></i>
+                <a href="/Default/Index" style="font-size:20px">首页</a>
+            </p>
+            <div class="sn-quick-menu">
+                <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
+                <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <form>
+        <div style="width:300px;margin:auto">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+
+                        <input type="email" name="UserEmail" id="UserEmail" lay-verify="required" placeholder="请输入邮箱号" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item layui-layout-admin">
+                <div class="layui-input-block">
+                    <div class="layui-footer" style="left: 0;padding-left:450px">
+                        <button type="button" class="layui-btn" onclick="AddUser()">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary" onclick="ClosePage()">取消</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        function AddUser() {
+            $.ajax({
+                url: "http://localhost:50784/api/Login/LookUpPwd?email=" + $("#UserEmail").val(),
+                dataType: "json",
+                type: "get",
+                success: function (res) {
+                    if (res == "成功") {
+                        alert("密码已发送到邮箱中，请注意查收");
+                    }
+
+                }
+            });
+        }
+    </script>
+</body>
+</html>

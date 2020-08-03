@@ -9,7 +9,7 @@
 
 <style>
     .box {
-        width: 600px;
+        width: 580px;
         height: 600px;
         margin: auto;
         margin-top: 100px;
@@ -17,18 +17,18 @@
 
     .box1 {
         width: 300px;
-        height: 400px;
+        height: 300px;
         float: left;
     }
 
         .box1 img {
             width: 300px;
-            height: 400px;
+            height: 300px;
         }
 
     .box2 {
         width: 250px;
-        height: 600px;
+        height: 300px;
         float: left;
         margin-left: 20px;
     }
@@ -61,115 +61,36 @@
             <a href="/Default/Index" style="font-size:20px">首页</a>
         </p>
         <div class="sn-quick-menu">
-            <div class="login"><a href="RegisterIndex.html" style="font-size:20px">注册</a></div>
+            <div class="login"><a href="/Shop/RegisterIndex" style="font-size:20px">注册</a></div>
             <div class="sp-cart"><a href="/Default/ShopCar" style="font-size:20px">购物车</a><span id="carnum">0</span></div>
         </div>
     </div>
 </div>
 
 <div class="box">
-    <div class="box1">
-    </div>
-    <div class="box2">
-        <p id="productname"></p>
-        <p id="price"></p>
-        <div id="put">
-            <span class="jian" id="jian">-</span>
-            <input type="text" value="1" id="num" style="width:50px;text-align:center;height:22px;" />
-            <span class="jia" id="jia">+</span>
+    <div>
+        <div class="box1">
         </div>
-        <p>
-            <input type="button" value="购买" class="btn btn-info" />
-            <input type="button" value="加入购物车" class="btn btn-success" id="shopcar" />
-        </p>
+        <div class="box2">
+            商品名称:<p id="productname"></p>
+            商品单价:<p id="price"></p>
+            <div id="put">
+                <span class="jian" id="jian">-</span>
+                <input type="text" value="1" id="num" style="width:30px;text-align:center;height:28px;" />
+                <span class="jia" id="jia">+</span>
+            </div>
+            <p>
+                <input type="button" value="购买" class="btn btn-info" id="buy" />
+                <input type="button" value="加入购物车" class="btn btn-success" id="shopcar" />
+            </p>
+        </div>
     </div>
-</div>
 
-<div id="app" style="margin-left:20px;">
-    <table class="table table-bordered">
-        <tr>
-            <td>
-                商品编号：
-            </td>
-            <td>
-                <input id="Text1" type="text" v-model="ProductId" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                信息反馈编号：
-            </td>
-            <td>
-                <input id="Text1" type="text" v-model="MessageId" />
-            </td>
-        <tr>
-            <td>
-                留言类型：
-            </td>
-            <td>
-                <select id="Select1" v-model="MessageType">
-                    <option value="">五星好评</option>
-                    <option value="四星喜欢">四星喜欢</option>
-                    <option value="一般喜欢">一般喜欢</option>
-                    <option value="差评">差评</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                留言主题：
-            </td>
-            <td>
-                <input id="Text1" type="text" v-model="Messagetitle" />
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                留言内容：
-            </td>
-            <td>
-                <textarea id="TextArea1" rows="5" cols="100" v-model="Messagecontent" placeholder="用户留言板..."></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                留言客户编号：
-            </td>
-            <td>
-                <input id="Text1" type="text" v-model="UserId" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                留言客户名：
-            </td>
-            <td>
-                <input id="Text1" type="text" v-model="Username" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                留言日期：
-            </td>
-            <td>
-                <input id="Text1" type="text" v-model="Commentdate" />
-            </td>
-        </tr>
-
-
-        <tr>
-            <td>
-                <input id="Button1" type="button" value="提交留言" v-on:click="add()" />
-            </td>
-        </tr>
-    </table>
-    <br />
-    <h3>用户留言板：</h3>
-    <br />
-    <textarea style="width:400px;height:150px;" v-model="info"></textarea>
+   
 
 </div>
+
+
 <script src="~/vue/vue.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
@@ -238,29 +159,25 @@
         });
     });
 
+    $("#buy").click(function () {
+        var num = $("#num").val();
+        location.href = "/Default/BuyShop?goodId=" + id + '&buycount=' + num;
+    });
 
-    new Vue({
-        el: "#app",
-        data() {
-            return {
-                ProductId: "",
-                MessageId: "",
-                MessageType: "",
-                Messagetitle: "",
-                Messagecontent: "",
-                UserId: "",
-                Username: "",
-                Commentdate: "",
-                info: ""
-            }
-        },
-        methods: {
-            add: function () {
-                this.info = "用户名称：" + this.Username + "\r\n留言类型："
-                    + this.MessageType + "\r\n留言：" + this.Messagecontent;
-            }
-        }
-    })
+    //new Vue({
+    //    el: "#app",
+    //    data() {
+    //        return {
+    //            info: ""
+    //        }
+    //    },
+    //    methods: {
+    //        add: function () {
+    //            this.info = "用户名称：" + this.Username + "\r\n留言类型："
+    //                + this.MessageType + "\r\n留言：" + this.Messagecontent;
+    //        }
+    //    }
+    //})
 
 </script>
 
