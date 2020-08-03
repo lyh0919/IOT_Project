@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IOT_Project_Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,6 +14,9 @@ namespace IOT_Project_DAL
         int AddOrder(string sql);
 
         int UptKuCun(string sql);
+
+
+
 
     }
 }

@@ -52,5 +52,10 @@ namespace IOT_Project_BLL.ShopCar
             }
             return _data.UptKuCun(sql);
         }
+
+        
+
+
+      
     }
 }

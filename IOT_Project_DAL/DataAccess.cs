@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
+using IOT_Project_Model;
 
 namespace IOT_Project_DAL
 {
@@ -45,5 +46,15 @@ namespace IOT_Project_DAL
                 return connection.Query<T>("select * from " + t.Name + " where ProId = "+productId);
             }
         }
+
+      
+
+       
+
+
+
+
+
+
     }
 }
