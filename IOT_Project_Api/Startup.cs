@@ -14,6 +14,7 @@ using Dapper;
 using IOT_Project_BLL.ShopCar;
 using IOT_Project_Model;
 using IOT_Project_BLL;
+using IOT_Project_BLL.Login;
 
 namespace IOT_Project_Api
 {
@@ -34,8 +35,10 @@ namespace IOT_Project_Api
             services.AddScoped<IDataAccess<ProductInfo>, DataAccess<ProductInfo>>();
             services.AddScoped<IDataAccess<ProductImg>, DataAccess<ProductImg>>();
             services.AddScoped<IGoodsList, GoodsList>();
-            services.AddScoped<IOrderAccess, OrderAccess>();
-            services.AddScoped<IOrderBusiness, OrderBusiness>();
+            //services.AddScoped<IOrderAccess, OrderAccess>();
+            //services.AddScoped<IOrderBusiness, OrderBusiness>();
+            services.AddScoped<ILogin, LoginBll>();
+            
 
             services.AddCors(options =>
             {

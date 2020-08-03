@@ -11,7 +11,7 @@ namespace IOT_Project_BLL.Login
     public class LoginBll : ILogin
     {
         //Data Source=192.168.43.44;Initial Catalog=Shop;User ID=sa;Pwd=123456
-        private readonly string conn = "Data Source=.;Initial Catalog=Shop;Integrated Security=True";
+        private readonly string conn = "Data Source=192.168.43.44;Initial Catalog=Shop;Integrated Security=True";
       
         public Customer ShowCustomer(Customer m)
         {
@@ -20,9 +20,9 @@ namespace IOT_Project_BLL.Login
             {
                 
                     sql= $"select * from Customer where UserName='" + m.UserName + "' and UserPwd='" + m.UserPwd + "'";
-                
-               
-                return db.Query<Customer>(sql).FirstOrDefault();
+
+                Customer customer = db.Query<Customer>(sql).FirstOrDefault();
+                return customer;
             }
         }
 
@@ -84,12 +84,12 @@ namespace IOT_Project_BLL.Login
           
         }
 
-        public List<Productinfo> ShowProductinfo()
+        public List<ProductInfo> ShowProductinfo()
         {
             using (SqlConnection db = new SqlConnection(conn))
             {
                 string sql = $"select * from Productinfo";
-                return db.Query<Productinfo>(sql).ToList();
+                return db.Query<ProductInfo>(sql).ToList();
             }
         }
 

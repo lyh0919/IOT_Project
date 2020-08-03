@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="aliyun-net-sdk-core" Version="1.5.8" />
+    <PackageReference Include="aliyun-net-sdk-dysmsapi" Version="1.0.0" />
     <PackageReference Include="JWT" Version="7.2.1" />
   </ItemGroup>
 
@@ -13,7 +15,7 @@
       <HintPath>C:\Users\User\Desktop\countent\短信验证阿里云\aliyun-net-sdk-core.dll</HintPath>
     </Reference>
     <Reference Include="aliyun-net-sdk-dybaseapi">
-      <HintPath>C:\Users\User\Desktop\countent\短信验证阿里云\aliyun-net-sdk-dybaseapi.dll</HintPath>
+      <HintPath>..\aliyun-net-sdk-dybaseapi.dll</HintPath>
     </Reference>
     <Reference Include="aliyun-net-sdk-dysmsapi">
       <HintPath>C:\Users\User\Desktop\countent\短信验证阿里云\aliyun-net-sdk-dysmsapi.dll</HintPath>

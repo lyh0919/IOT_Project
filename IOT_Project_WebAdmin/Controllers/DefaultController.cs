@@ -23,6 +23,10 @@ namespace IOT_Project_WebAdmin.Controllers
         {
             return View();
         }
+        public IActionResult BuyShop()
+        {
+            return View();
+        }
 
         //订单
         public IActionResult Ding()

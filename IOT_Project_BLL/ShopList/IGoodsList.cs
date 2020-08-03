@@ -11,7 +11,10 @@ namespace IOT_Project_BLL.ShopCar
         ProductInfo GetProductinfo(int productId);
         IEnumerable<ProductImg> GetProductImgs(int productId);
 
+
         int AddOrder(OrderInfo order,List<Orderdetail> orderdetails);
+        int AddOrderOne(OrderInfo order, Orderdetail orderdetail);
         int UptKuCun(List<ProductInfo> kucun);
+        int UptKuCunOne(int goodId, int buycount);
     }
 }
